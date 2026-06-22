@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smaragdna Mrežnica - Fotoalbum</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="glavno-zaglavlje">
+        <nav>
+            <div class="logo-kontejner">
+                <a href="index.html" class="logo">MREŽNICA</a>
+                <div class="header-vrijeme">
+                    <span id="trenutni-dan-datum">Učitavanje...</span>
+                    <span id="sat" class="sat-uzivo">00:00:00</span>
+                </div>
+            </div>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Početna</a></li>
+                <li><a href="autenticnost.html" class="nav-link">Autentičnost</a></li>
+                <li><a href="ribolov.html" class="nav-link">Ribolov & Fauna</a></li>
+                <li><a href="istrazi.html" class="nav-link">Istraži</a></li>
+                <li><a href="pravila.html" class="nav-link">Pravila</a></li>
+                <li><a href="album.html" class="nav-link aktivni">Fotoalbum</a></li>
+                <li><a href="clanovi.html" class="nav-link">Članovi</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="album" class="sekcija-tamna">
+        <h2>Predivan Fotoalbum</h2>
+        <div class="album-filteri">
+            <button class="filter-gumb aktivno" data-kategorija="sve">Sve Slike</button>
+            <button class="filter-gumb" data-kategorija="slapovi">Slapovi</button>
+            <button class="filter-gumb" data-kategorija="ljubimci">Ljubimci</button>
+            <button class="filter-gumb" data-kategorija="plitko">Plitki dio</button>
+            <button class="filter-gumb" data-kategorija="otok">Otok Ljubavi</button>
+        </div>
+
+        <div class="galerija-grid">
+            <div class="galerija-stavka" data-kat="slapovi">
+                <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80" alt="Slap">
+                <div class="galerija-naslov">Slap Šušnjar</div>
+            </div>
+            <div class="galerija-stavka" data-kat="otok">
+                <img src="https://images.unsplash.com/photo-1476820865390-c52aeebb9891?auto=format&fit=crop&w=600&q=80" alt="Otok">
+                <div class="galerija-naslov">Otok Ljubavi</div>
+            </div>
+            <div class="galerija-stavka" data-kat="ljubimci">
+                <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=600&q=80" alt="Pas">
+                <div class="galerija-naslov">Pseća Plaža</div>
+            </div>
+            <div class="galerija-stavka" data-kat="plitko">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80" alt="Plitko">
+                <div class="galerija-naslov">Plitki sprudovi</div>
+            </div>
+        </div>
+    </section>
+
+    <div id="lightbox" class="lightbox">
+        <span class="zatvori">&times;</span>
+        <button class="strelica lijevo">&#10094;</button>
+        <img class="lightbox-sadrzaj" id="lightbox-slika" alt="Povećana slika">
+        <button class="strelica desno">&#10095;</button>
+    </div>
+
+    <footer>
+        <div class="footer-sadrzaj">
+            <div class="footer-stupac">
+                <h3>O Portalu</h3>
+                <p>Nezavisni turistički portal o rijeci Mrežnici.</p>
+            </div>
+            <div class="footer-stupac">
+                <h3>Kontakt</h3>
+                <p>Hitne službe (HGSS): 112</p>
+                <p>Email: cuvari@mreznica.hr</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="godina-footer">2026</span> Udruga Čuvari Mrežnice.</p>
+        </div>
+    </footer>
+
+    <script src="javascript.js"></script>
+</body>
+</html>
