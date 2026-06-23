@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mrežnica - Članovi (Prijava)</title>
+    <title>Mrežnica - Članovi</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="stranica-prijava">
+<body>
 
     <header class="glavno-zaglavlje">
         <nav>
             <div class="logo-kontejner">
-                <a href="index.html" class="logo">MREŽNICA</a>
+                <a href="index.html" class="logo">MREŽNICA<span>.</span></a>
+                <div class="header-vrijeme"><span id="trenutni-dan-datum">...</span><span id="sat" class="sat-uzivo">00:00:00</span></div>
             </div>
             <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
             <ul class="nav-menu">
@@ -28,25 +29,36 @@
 
     <main class="login-sekcija">
         <div class="login-kartica">
-            <h2>Admin Prijava</h2>
-            <p class="login-opis">Pristup zaštićenom dijelu za članove udruge.</p>
+            <h2>Portal za Članove</h2>
+            <p class="login-opis">Pristup zaštićenoj bazi podataka Udruge Čuvari Mrežnice.</p>
             
             <form id="admin-login-forma" class="forma-login">
                 <div class="input-grupa">
                     <label for="korisnik">Korisničko ime</label>
-                    <input type="text" id="korisnik" placeholder="Unesite korisničko ime" required>
+                    <input type="text" id="korisnik" autocomplete="off" placeholder="Npr. admin" required>
                 </div>
                 <div class="input-grupa">
                     <label for="lozinka">Lozinka</label>
-                    <input type="password" id="lozinka" placeholder="Unesite lozinku" required>
+                    <input type="password" id="lozinka" placeholder="••••••••" required>
                 </div>
-                <p id="login-poruka" class="skrivena-poruka"></p>
+                <div id="login-poruka" class="skrivena-poruka"></div>
                 <button type="submit" class="zeleni-btn">Prijavi se</button>
             </form>
         </div>
     </main>
 
     <footer>
+        <div class="footer-sadrzaj">
+            <div class="footer-stupac">
+                <h3>O Portalu</h3>
+                <p>Nezavisni ekološki i turistički vodič kroz rijeku Mrežnicu.</p>
+            </div>
+            <div class="footer-stupac">
+                <h3>Kontakt</h3>
+                <p>Hitne službe: 112</p>
+                <p>Email: cuvari@mreznica.hr</p>
+            </div>
+        </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Udruga Čuvari Mrežnice. | Design by <strong>Martina Kovačić</strong></p>
         </div>
