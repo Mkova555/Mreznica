@@ -3,78 +3,967 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mrežnica - Početna</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Smaragdna Mrežnica</title>
+    
+    <!-- FontAwesome za predivne moderne ikone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts za predivan font naslova -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- OSNOVE --- */
+        :root {
+            --crna: #070b09; 
+            --tamno-zelena: rgba(16, 24, 19, 0.75); 
+            --smaragdna: #00df82; 
+            --smaragdna-glow: rgba(0, 223, 130, 0.4);
+            --bijela: #f0f5f2;
+            --siva: #a3b3aa;
+            --tamno-siva: #1e2924;
+            --crvena: #ff4444;
+        }
+
+        html, body {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(rgba(7, 11, 9, 0.82), rgba(7, 11, 9, 0.94)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+            color: var(--bijela);
+            overflow-x: hidden; 
+            width: 100%; scroll-behavior: smooth;
+        }
+
+        *, *::before, *::after { box-sizing: inherit; }
+
+        /* --- GLAVNO ZAGLAVLJE --- */
+        .glavno-zaglavlje {
+            position: fixed; width: 100%; top: 0;
+            background-color: rgba(7, 11, 9, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--smaragdna);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .glavno-zaglavlje.skrolano {
+            padding: 5px 0;
+            background-color: rgba(5, 8, 6, 0.95);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; max-width: 1400px; margin: 0 auto;
+        }
+
+        /* ANIMACIJA LOGOTIPA VALOVA */
+        @keyframes zivi-valovi {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-4px, -2px) rotate(-4deg); }
+            50% { transform: translate(0, 2px) rotate(2deg); }
+            75% { transform: translate(4px, -1px) rotate(-2deg); }
+        }
+
+        .logo { 
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px; font-weight: 900; color: var(--smaragdna); text-decoration: none; 
+            letter-spacing: 2px; display: flex; align-items: center; gap: 10px; text-shadow: 0 0 10px var(--smaragdna-glow);
+        }
+        .logo i {
+            display: inline-block;
+            animation: zivi-valovi 5s ease-in-out infinite;
+        }
+
+        .nav-menu { display: flex; list-style: none; gap: 15px; align-items: center; margin: 0; padding: 0; }
+        .nav-link { 
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none; color: var(--bijela); font-weight: 700; text-transform: uppercase; 
+            font-size: 14px; transition: 0.3s; position: relative; padding: 5px 0;
+            letter-spacing: 1px;
+        }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--smaragdna); transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--smaragdna); text-shadow: 0 0 10px rgba(0, 223, 130, 0.5); }
+
+        .hamburger { display: none; cursor: pointer; z-index: 2000; }
+        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: 0.3s; background-color: var(--smaragdna); }
+
+        /* --- HERO & STATUS --- */
+        .hero-sekcija {
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding-top: 120px; padding-bottom: 50px; position: relative; overflow: hidden;
+        }
+        
+        #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0.35; }
+
+        .hero-sadrzaj { position: relative; z-index: 2; max-width: 900px; padding: 0 20px; }
+        .hero-sadrzaj h1 { font-family: 'Montserrat', sans-serif; font-size: 4.5rem; font-weight: 900; color: var(--bijela); margin-bottom: 15px; text-shadow: 0 0 30px rgba(0, 0, 0, 0.6); line-height: 1.1; }
+        .hero-sadrzaj h1 span { color: var(--smaragdna); text-shadow: 0 0 20px var(--smaragdna-glow); }
+        .hero-sadrzaj p { font-size: 1.4rem; max-width: 700px; margin: 0 auto; color: var(--siva); text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+
+        .status-traka {
+            position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+            background: var(--tamno-zelena); border: 1px solid rgba(0, 223, 130, 0.3);
+            padding: 25px; border-radius: 20px; margin-top: 50px; width: 90%; max-width: 1200px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        }
+        .status-stavka { flex: 1; min-width: 220px; padding: 10px 15px; border-right: 1px solid rgba(0, 223, 130, 0.2); display: flex; flex-direction: column; justify-content: center; }
+        .status-stavka:last-child { border-right: none; }
+        .status-oznaka { display: block; font-size: 11px; color: var(--siva); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1.5px; font-weight: 700; }
+        .status-vrijednost { font-size: 1.25rem; font-weight: bold; color: var(--bijela); display: flex; align-items: center; gap: 8px; }
+        .status-smaragd { color: var(--smaragdna); font-size: 1.5rem; text-shadow: 0 0 8px var(--smaragdna-glow); }
+
+        .radio-btn-kontejner { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
+        .radio-btn {
+            background: var(--smaragdna); color: var(--crna); border: none; padding: 12px 25px;
+            border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; font-size: 1rem;
+            display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 223, 130, 0.3);
+        }
+        .radio-btn:hover { background: var(--bijela); box-shadow: 0 0 20px var(--smaragdna); transform: translateY(-2px); }
+        
+        .vizualizator { display: none; align-items: flex-end; gap: 3px; height: 20px; margin-top: 5px; }
+        .vizualizator.aktivno { display: flex; }
+        .viz-stupac { width: 3px; height: 5px; background-color: var(--smaragdna); border-radius: 3px; animation: skoci 0.8s ease-in-out infinite alternate; }
+        .viz-stupac:nth-child(2) { animation-delay: 0.15s; } .viz-stupac:nth-child(3) { animation-delay: 0.3s; }
+        .viz-stupac:nth-child(4) { animation-delay: 0.05s; } .viz-stupac:nth-child(5) { animation-delay: 0.25s; }
+        @keyframes skoci { 0% { height: 4px; } 100% { height: 20px; } }
+
+        /* --- SEKCIJE --- */
+        section { padding: 90px 5%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 5; }
+        h2 { 
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem; color: var(--bijela); margin-bottom: 40px; text-align: center; 
+            font-weight: 900; letter-spacing: 1px; text-shadow: 0 5px 15px rgba(0,0,0,0.5); 
+        }
+        h2 span { color: var(--smaragdna); text-shadow: 0 0 20px var(--smaragdna-glow); }
+        
+        .sekcija-tekst { 
+            max-width: 950px; margin: 0 auto; font-size: 1.2rem; line-height: 1.85; color: var(--siva); 
+            text-align: center; background: rgba(7, 11, 9, 0.75); padding: 40px; border-radius: 20px; 
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .sekcija-tekst strong { color: var(--bijela); border-bottom: 1px dashed var(--smaragdna); padding-bottom: 2px; }
+        .razdjelnik { height: 1px; background: linear-gradient(90deg, transparent, var(--smaragdna), transparent); margin: 60px 0; opacity: 0.35; }
+
+        /* KATEGORIJE GRID */
+        .kategorije-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
+        .kat-kartica {
+            background: var(--tamno-zelena); padding: 30px; border-radius: 18px; 
+            border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); text-align: left;
+            position: relative; overflow: hidden; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            cursor: pointer; /* Kursor za klik */
+        }
+        .kat-kartica::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--smaragdna); transform: scaleX(0); transition: 0.3s; transform-origin: left; }
+        .kat-kartica:hover::before { transform: scaleX(1); }
+        .kat-kartica:hover { 
+            transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0, 223, 130, 0.15); 
+            background: rgba(20, 32, 25, 0.85); border-color: rgba(0, 223, 130, 0.3);
+        }
+        .kat-kartica h3 { color: var(--bijela); font-size: 1.45rem; margin-top: 0; display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .kat-kartica h3 i { color: var(--smaragdna); }
+        .kat-kartica p { color: var(--siva); font-size: 0.98rem; line-height: 1.65; margin-bottom: 15px; }
+        .kat-otvori-btn { font-size: 0.9rem; color: var(--smaragdna); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 5px; transition: 0.3s; }
+        .kat-kartica:hover .kat-otvori-btn { gap: 10px; }
+
+        /* --- OVERLAY ZA DETALJE KATEGORIJE --- */
+        .kat-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--crna); z-index: 4000;
+            overflow-y: auto; display: none; opacity: 0; transition: opacity 0.4s ease;
+            background: linear-gradient(to bottom, rgba(5, 8, 6, 0.98), rgba(7, 11, 9, 1));
+        }
+        .kat-overlay.aktivno { display: block; opacity: 1; }
+        
+        .kat-overlay-header {
+            position: sticky; top: 0; width: 100%; padding: 20px 5%;
+            background: rgba(4, 6, 5, 0.9); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,223,130,0.3); z-index: 4010;
+            display: flex; justify-content: flex-start;
+        }
+        .nazad-btn {
+            background: transparent; color: var(--bijela); border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 20px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold;
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .nazad-btn:hover { background: var(--smaragdna); color: var(--crna); border-color: var(--smaragdna); }
+
+        .kat-overlay-content { max-width: 1000px; margin: 50px auto 100px; padding: 0 20px; text-align: center; }
+        .kat-overlay-naslov { font-size: 3.5rem; color: var(--smaragdna); margin-bottom: 20px; }
+        .kat-overlay-tekst { font-size: 1.2rem; color: var(--siva); line-height: 1.8; margin-bottom: 40px; text-align: left; background: var(--tamno-zelena); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        
+        /* SLIDER SLIKA U OVERLAYU */
+        .slider-wrapper { position: relative; width: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(0,223,130,0.2); }
+        .slider-slika { width: 100%; height: 500px; object-fit: cover; display: block; }
+        .slider-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.6); color: var(--bijela); border: 1px solid var(--smaragdna);
+            width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.2rem;
+            transition: 0.3s; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px);
+        }
+        .slider-btn:hover { background: var(--smaragdna); color: var(--crna); }
+        .slider-prev { left: 20px; } .slider-next { right: 20px; }
+        .slider-indikatori { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+        .sl-tocka { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
+        .sl-tocka.aktivna { background: var(--smaragdna); box-shadow: 0 0 10px var(--smaragdna); transform: scale(1.2); }
+
+        /* PRAVILA PONAŠANJA */
+        .pravila-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        .pravilo-kutija { background: var(--tamno-zelena); padding: 40px; border-radius: 20px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .dozvoljeno { border-top: 5px solid var(--smaragdna); } .zabranjeno { border-top: 5px solid var(--crvena); }
+        .pravilo-kutija h3 { font-size: 1.6rem; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .dozvoljeno h3 { color: var(--smaragdna); } .zabranjeno h3 { color: var(--crvena); }
+        .pravilo-kutija ul { list-style: none; padding: 0; margin: 0; }
+        .pravilo-kutija li { padding-left: 30px; margin-bottom: 18px; color: var(--siva); position: relative; line-height: 1.6; font-size: 1.05rem; }
+        .dozvoljeno li::before { content: "\f00c"; font-family: "Font Awesome 5 Free"; font-weight: 900; position: absolute; left: 0; color: var(--smaragdna); }
+        .zabranjeno li::before { content: "\f00d"; font-family: "Font Awesome 5 Free"; font-weight: 900; position: absolute; left: 0; color: var(--crvena); }
+
+        /* KONTAKT SEKCIJA */
+        .kontakt-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px;
+            background: var(--tamno-zelena); padding: 40px; border-radius: 20px; 
+            backdrop-filter: blur(12px); border: 1px solid rgba(0,223,130,0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .kontakt-forma { display: flex; flex-direction: column; gap: 20px; }
+        .kontakt-forma input, .kontakt-forma textarea {
+            padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.6);
+            color: var(--bijela); outline: none; font-size: 1rem; font-family: inherit; transition: 0.3s;
+        }
+        .kontakt-forma textarea { resize: vertical; min-height: 120px; }
+        .kontakt-forma input:focus, .kontakt-forma textarea:focus { border-color: var(--smaragdna); box-shadow: 0 0 10px rgba(0, 223, 130, 0.2); }
+        .btn-submit { background: var(--smaragdna); color: var(--crna); border: none; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background: var(--bijela); transform: translateY(-2px); }
+        .kontakt-info h3 { margin-top: 0; color: var(--bijela); margin-bottom: 20px; }
+        .info-red { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; color: var(--siva); font-size: 1.05rem; }
+        .info-red i { color: var(--smaragdna); font-size: 1.3rem; width: 25px; text-align: center; }
+        .karta { width: 100%; height: 250px; border-radius: 12px; border: none; margin-top: 20px; }
+
+        /* GALERIJA */
+        .galerija-filteri { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+        .filter-btn { padding: 12px 28px; background: rgba(0,0,0,0.6); color: var(--bijela); border: 1px solid rgba(0,223,130,0.3); border-radius: 30px; cursor: pointer; font-weight: bold; transition: 0.3s; backdrop-filter: blur(5px); }
+        .filter-btn.aktivno, .filter-btn:hover { background: var(--smaragdna); color: var(--crna); border-color: var(--smaragdna); }
+        .galerija-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .slika-kutija { position: relative; border-radius: 18px; overflow: hidden; height: 270px; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .slika-kutija img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .slika-kutija:hover img { transform: scale(1.08); }
+        .slika-opis { position: absolute; bottom: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.95)); padding: 25px 20px 20px; color: var(--bijela); font-weight: bold; text-align: left; transform: translateY(5px); transition: 0.3s; }
+        .slika-kutija:hover .slika-opis { transform: translateY(0); }
+        .slika-opis span { display: block; font-size: 0.85rem; color: var(--smaragdna); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* NAPREDNI LIGHTBOX MODAL */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 6, 5, 0.98);
+            z-index: 5000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .lightbox.aktivan { display: flex; opacity: 1; }
+        .lightbox-sadrzaj { max-width: 90%; text-align: center; position: relative; }
+        
+        /* Novi zatvori X, odvojen od slike */
+        .lightbox-zatvori { position: fixed; top: 30px; right: 40px; color: var(--siva); font-size: 2.5rem; cursor: pointer; transition: 0.3s; z-index: 5010; }
+        .lightbox-zatvori:hover { color: var(--smaragdna); transform: scale(1.1); }
+        
+        .lightbox-slika { max-width: 100%; max-height: 70vh; border-radius: 12px; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        
+        /* Strelice lijevo/desno */
+        .lb-strelica {
+            position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); border: 1px solid var(--siva);
+            color: var(--bijela); width: 60px; height: 60px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; transition: 0.3s; z-index: 5010;
+        }
+        .lb-strelica:hover { background: var(--smaragdna); color: var(--crna); border-color: var(--smaragdna); }
+        .lb-prev { left: -80px; } .lb-next { right: -80px; }
+        @media (max-width: 768px) { .lb-prev { left: 10px; } .lb-next { right: 10px; } }
+        
+        /* Tekst ispod slike i link za detalje */
+        .lightbox-info { margin-top: 20px; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 12px; border: 1px solid rgba(0,223,130,0.2); }
+        .lightbox-naslov { color: var(--smaragdna); font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; }
+        .lightbox-tekst { color: var(--bijela); font-size: 1rem; margin-bottom: 15px; }
+        .lightbox-link-btn { background: transparent; border: 1px solid var(--smaragdna); color: var(--smaragdna); padding: 8px 20px; border-radius: 30px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .lightbox-link-btn:hover { background: var(--smaragdna); color: var(--crna); }
+
+        /* ČLANOVI / LOGIN */
+        .login-sekcija { 
+            background: var(--tamno-zelena); padding: 60px 40px; border-radius: 24px; text-align: center; 
+            max-width: 600px; margin: 0 auto; border: 1px solid rgba(0,223,130,0.25); backdrop-filter: blur(12px); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .login-forma { display: flex; flex-direction: column; gap: 18px; margin-top: 30px; }
+        .login-forma input { padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.6); color: var(--bijela); outline: none; font-size: 1rem; }
+        .login-forma input:focus { border-color: var(--smaragdna); }
+        .login-btn { background: var(--smaragdna); color: var(--crna); border: none; padding: 18px; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        .login-btn:hover { background: var(--bijela); }
+        
+        .clanska-kartica { display: none; background: linear-gradient(135deg, rgba(16, 24, 19, 0.95), rgba(7, 11, 9, 0.98)); padding: 40px; border-radius: 20px; border: 2px solid var(--smaragdna); text-align: left; }
+        .clanska-zaglavlje { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 223, 130, 0.2); padding-bottom: 15px; margin-bottom: 20px; }
+        .clanska-status { background: rgba(0, 223, 130, 0.2); color: var(--smaragdna); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+
+        /* FOOTER */
+        footer { background: rgba(4, 6, 5, 0.98); padding: 70px 5% 30px; border-top: 2px solid var(--tamno-zelena); text-align: center; backdrop-filter: blur(10px); margin-top: 80px;}
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; margin-bottom: 40px; text-align: left; max-width: 1200px; margin: 0 auto 40px; }
+        .footer-stupac h3 { color: var(--smaragdna); margin-bottom: 20px; font-size: 1.4rem; position: relative; padding-bottom: 8px; }
+        .footer-stupac h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background-color: var(--smaragdna); }
+        .footer-stupac p { color: var(--siva); margin-bottom: 12px; line-height: 1.7; font-size: 0.95rem; }
+        .socijalne-mreze { display: flex; gap: 15px; margin-top: 15px; }
+        .socijalne-mreze a { color: var(--bijela); font-size: 1.5rem; transition: 0.3s; }
+        .socijalne-mreze a:hover { color: var(--smaragdna); transform: scale(1.2); }
+        
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; color: #55665d; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 15px;}
+        
+        /* Brojač posjeta */
+        .brojac-posjeta { background: rgba(0, 223, 130, 0.1); border: 1px solid rgba(0, 223, 130, 0.3); padding: 8px 15px; border-radius: 8px; color: var(--smaragdna); font-weight: bold; display: flex; align-items: center; gap: 10px; }
+
+        /* ZABE SKAKAVICE */
+        .zabe-kontejner {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 100px;
+            pointer-events: none; z-index: 9999;
+        }
+        .zaba {
+            position: absolute; color: var(--smaragdna); font-size: 28px;
+            text-shadow: 0 5px 10px rgba(0,0,0,0.5); bottom: 15px;
+        }
+        .zaba1 { left: 15%; animation: skok-zabe 4s infinite 1s; }
+        .zaba2 { left: 50%; animation: skok-zabe 5s infinite 2.5s; color: #2ecc71; font-size: 24px;}
+        .zaba3 { right: 20%; animation: skok-zabe 6.5s infinite 0.5s; font-size: 32px; }
+
+        @keyframes skok-zabe {
+            0%, 80%, 100% { transform: translateY(0) scale(1); }
+            82% { transform: translateY(5px) scale(1.1, 0.8); }
+            88% { transform: translateY(-50px) scale(0.9, 1.2); }
+            94% { transform: translateY(0) scale(1.1, 0.8); }
+            97% { transform: translateY(0) scale(1); }
+        }
+
+        @media (max-width: 1024px) {
+            .hamburger { display: block; }
+            .nav-menu { position: fixed; top: 0; left: -100vw; width: 100vw; height: 100vh; background-color: rgba(7, 11, 9, 0.99); backdrop-filter: blur(15px); flex-direction: column; justify-content: center; gap: 30px; transition: 0.4s ease-in-out; }
+            .nav-menu.active { left: 0; }
+            .nav-link { font-size: 1.5rem; display: block; padding: 10px; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; } .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); } .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+            .status-traka { flex-direction: column; padding: 20px; } .status-stavka { border-right: none; border-bottom: 1px solid rgba(0, 223, 130, 0.1); padding: 18px 0; } .status-stavka:last-child { border-bottom: none; }
+            .kontakt-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+        }
+    </style>
 </head>
 <body>
 
-    <header class="glavno-zaglavlje">
+    <!-- ZAGLAVLJE -->
+    <header class="glavno-zaglavlje" id="glavno-zaglavlje">
         <nav>
-            <div class="logo-kontejner">
-                <a href="index.html" class="logo">MREŽNICA<span>.</span></a>
-                <div class="header-vrijeme"><span id="trenutni-dan-datum">...</span><span id="sat" class="sat-uzivo">00:00:00</span></div>
+            <a href="#" class="logo">
+                <i class="fa-solid fa-water"></i> MREŽNICA
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
             </div>
-            <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link aktivni">Početna</a></li>
-                <li><a href="autenticnost.html" class="nav-link">Autentičnost</a></li>
-                <li><a href="ribolov.html" class="nav-link">Ribolov</a></li>
-                <li><a href="istrazi.html" class="nav-link">Istraži</a></li>
-                <li><a href="pravila.html" class="nav-link">Pravila</a></li>
-                <li><a href="album.html" class="nav-link">Fotoalbum</a></li>
-                <li><a href="clanovi.html" class="nav-link">Članovi</a></li>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#pocetna" class="nav-link">Početna</a></li>
+                <li><a href="#o-rijeci" class="nav-link">O rijeci</a></li>
+                <li><a href="#kategorije" class="nav-link">Sadržaj</a></li>
+                <li><a href="#galerija" class="nav-link">Album</a></li>
+                <li><a href="#kontakt" class="nav-link">Kontakt</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="hero-sekcija">
-        <div class="hero-sadrzaj">
-            <h1>Smaragdni Biser</h1>
-            <p>Doživite netaknutu prirodu, mistične slapove i savršeni mir rijeke Mrežnice.</p>
-        </div>
-
-        <div class="widget-traka">
-            <div class="widget-stavka">
-                <span class="widget-oznaka">💧 Temperatura vode</span>
-                <div class="widget-vrijednost neon-zelena">22.4°C</div>
-                <span class="widget-opis">Idealno za kupanje i osvježenje</span>
+    <!-- WRAPPER za cijeli sadržaj koji nije overlay -->
+    <div id="glavni-sadrzaj">
+        
+        <section id="pocetna" class="hero-sekcija">
+            <canvas id="hero-canvas"></canvas>
+            <div class="hero-sadrzaj">
+                <h1>Smaragdna <span>Ljepotica</span></h1>
+                <p>Zeleno srce Hrvatske. Uroni u netaknutu prirodu, osjeti apsolutni mir i poštuj našu rijeku.</p>
             </div>
-            <div class="widget-stavka">
-                <span class="widget-oznaka">📈 Stanje vodostaja</span>
-                <div class="widget-vrijednost">Stabilno</div>
-                <span class="widget-opis">Sigurno za kajak i kanu avanture</span>
-            </div>
-            <div class="widget-stavka">
-                <span class="widget-oznaka">🛡️ Ekološki čuvari</span>
-                <div class="widget-vrijednost neon-zelena">4 Aktivna</div>
-                <span class="widget-opis">Udruga vrši redoviti nadzor obale</span>
-            </div>
-        </div>
-
-        <div class="slider-kontejner">
-            <div class="slide active">
-                <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1100&q=80" alt="Slapovi">
-                <div class="slide-tekst">
-                    <h3>93 Čarobna Slapova</h3>
-                    <p>Otkrijte skrivene prirodne barijere i kaskade rasute duž cijelog toka.</p>
+            
+            <div class="status-traka">
+                <div class="status-stavka">
+                    <span class="status-oznaka" id="datum-godina">Učitavanje...</span>
+                    <span class="status-vrijednost status-smaragd" id="sat"><i class="fa-regular fa-clock"></i> 00:00</span>
+                </div>
+                <div class="status-stavka">
+                    <span class="status-oznaka">Temperatura & Kvaliteta</span>
+                    <span class="status-vrijednost"><i class="fa-solid fa-temperature-half" style="color: var(--smaragdna);"></i> 22°C | <span class="status-smaragd">Izvrsna</span></span>
+                </div>
+                <div class="status-stavka">
+                    <span class="status-oznaka">Prognoza (3 dana)</span>
+                    <span class="status-vrijednost" style="font-size: 0.95rem; line-height: 1.4;">
+                        <span style="display:block;">Danas ☀️ 28°C</span>
+                        <span style="display:block; color:var(--siva);">Sutra ⛅ 26°C | Prek. ☀️ 29°C</span>
+                    </span>
+                </div>
+                <div class="status-stavka">
+                    <span class="status-oznaka">Mrežnica FM</span>
+                    <div class="radio-btn-kontejner">
+                        <button id="radio-btn" class="radio-btn"><i class="fa-solid fa-play"></i> Slušaj uživo</button>
+                        <div class="vizualizator" id="radio-vizualizator">
+                            <div class="viz-stupac"></div><div class="viz-stupac"></div><div class="viz-stupac"></div><div class="viz-stupac"></div><div class="viz-stupac"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="slide">
-                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1100&q=80" alt="Šuma">
-                <div class="slide-tekst">
-                    <h3>Netaknuta Zelena Oaza</h3>
-                    <p>Pobjegnite od gradske vreve u mirisne i čiste kanjone divljine.</p>
+        </section>
+
+        <section id="o-rijeci">
+            <h2>Autentičnost <span>& Povijest</span></h2>
+            <div class="sekcija-tekst">
+                <p>Mrežnica nije samo rijeka, ona je fenomen. Sa svojih nevjerojatnih <strong>93 sedrena slapa</strong>, Mrežnica je jedna od najposebnijih krških rijeka u Europi. Njena autentičnost leži u specifičnoj smaragdno-zelenoj boji, netaknutim kanjonima i stoljetnom suživotu čovjeka i prirode. Ovdje su nekada radili brojni mlinovi čiji se ostaci i danas mogu vidjeti.</p>
+                <p>Ona je dom mnogim zaštićenim vrstama, od ptica vodomara do labudova i vidri. <strong>Za ribolovce:</strong> Rijeka je izuzetno bogata ribljim fondom. Molimo sve posjetitelje da poštuju ekosustav.</p>
+            </div>
+        </section>
+
+        <div class="razdjelnik"></div>
+
+        <section id="kategorije">
+            <h2>Sve Što <span>Mrežnica Nudi</span></h2>
+            <div class="kategorije-grid">
+                <!-- Dodan data-kat-id za JS povezivanje -->
+                <div class="kat-kartica" data-kat-id="slapovi">
+                    <h3><i class="fa-solid fa-water"></i> Slapovi</h3>
+                    <p>Otkrijte magiju 93 slapa. Šušnjar, Milkovića slap i mnogi drugi čekaju da ih istražite.</p>
+                    <div class="kat-otvori-btn">Otvori kategoriju <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="kat-kartica" data-kat-id="kupalista">
+                    <h3><i class="fa-solid fa-umbrella-beach"></i> Kupališta</h3>
+                    <p>Najljepša mjesta za ljetno osvježenje. Plitki sprudovi za obitelj i duboki kanjoni za skokove.</p>
+                    <div class="kat-otvori-btn">Otvori kategoriju <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="kat-kartica" data-kat-id="hrana">
+                    <h3><i class="fa-solid fa-utensils"></i> Hrana</h3>
+                    <p>Lokalni restorani nude domaću pastrvu, roštilj i paletu osvježavajućih pića tik uz rijeku.</p>
+                    <div class="kat-otvori-btn">Otvori kategoriju <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="kat-kartica" data-kat-id="smjestaj">
+                    <h3><i class="fa-solid fa-campground"></i> Odmor</h3>
+                    <p>Prespavajte uz žubor rijeke. Nudimo drvene kućice, auto-kampove i apsolutan mir.</p>
+                    <div class="kat-otvori-btn">Otvori kategoriju <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="kat-kartica" data-kat-id="ljubimci">
+                    <h3><i class="fa-solid fa-dog"></i> Za ljubimce</h3>
+                    <p>Posebno označene zone i plitki dijelovi rijeke gdje vaši dlakavi prijatelji mogu plivati.</p>
+                    <div class="kat-otvori-btn">Otvori kategoriju <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="kat-kartica" data-kat-id="ribolov">
+                    <h3><i class="fa-solid fa-fish"></i> Ribolovci</h3>
+                    <p>Informacije o ribolovnim zonama, kupnji dozvola i vrstama riba u našem toku.</p>
+                    <div class="kat-otvori-btn">Otvori kategoriju <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="kat-kartica" data-kat-id="dogadanja">
+                    <h3><i class="fa-solid fa-calendar-days"></i> Događanja</h3>
+                    <p>Kino pod zvijezdama, utrke čamaca i koncerti kroz cijelo ljeto.</p>
+                    <div class="kat-otvori-btn">Otvori kategoriju <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="kat-kartica" data-kat-id="akcije">
+                    <h3><i class="fa-solid fa-hand-holding-heart"></i> Eko akcije</h3>
+                    <p>Pridružite se volonterima u proljetnom čišćenju obale i pomozite nam.</p>
+                    <div class="kat-otvori-btn">Otvori kategoriju <i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </div>
-        </div>
-    </main>
+        </section>
 
-    <footer>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Udruga Čuvari Mrežnice. | Design by <strong>Martina Kovačić</strong></p>
-        </div>
-    </footer>
+        <div class="razdjelnik"></div>
 
-    <script src="javascript.js"></script>
+        <section id="pravila">
+            <h2>Pravila <span>Ponašanja</span></h2>
+            <div class="pravila-grid">
+                <div class="pravilo-kutija dozvoljeno">
+                    <h3><i class="fa-solid fa-circle-check"></i> Preporučuje se</h3>
+                    <ul>
+                        <li>Sakupljanje vlastitog smeća i odnošenje u kante.</li>
+                        <li>Korištenje biorazgradivih krema za sunčanje.</li>
+                        <li>Očuvanje osjetljivih sedrenih barijera (ne gazite).</li>
+                    </ul>
+                </div>
+                <div class="pravilo-kutija zabranjeno">
+                    <h3><i class="fa-solid fa-circle-xmark"></i> Strogo zabranjeno</h3>
+                    <ul>
+                        <li>Bacanje otpada u rijeku ili na obalu.</li>
+                        <li>Korištenje šampona ili sapuna u vodi.</li>
+                        <li>Vožnja divljih motornih čamaca.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="razdjelnik"></div>
+
+        <section id="galerija">
+            <h2>Album <span>Slika</span></h2>
+            <div class="galerija-filteri">
+                <button class="filter-btn aktivno" data-filter="sve">Sve</button>
+                <button class="filter-btn" data-filter="slapovi">Slapovi</button>
+                <button class="filter-btn" data-filter="ljubimci">Ljubimci</button>
+                <button class="filter-btn" data-filter="hrana">Hrana</button>
+                <button class="filter-btn" data-filter="smjestaj">Smještaj</button>
+            </div>
+
+            <div class="galerija-grid" id="galerija-kontejner">
+                <!-- Dodan data-opis-dugi za prikaz ispod slike i data-kat-id za link -->
+                <div class="slika-kutija" data-kategorija="slapovi" data-kat-id="slapovi" data-opis-dugi="Najpoznatiji slap na Mrežnici, visok preko 4 metra. Idealan za fotografiranje i hidromasažu u podnožju.">
+                    <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80" alt="Slap">
+                    <div class="slika-opis"><span>Slapovi</span>Slap Šušnjar</div>
+                </div>
+                <div class="slika-kutija" data-kategorija="ljubimci" data-kat-id="ljubimci" data-opis-dugi="Ovo kupalište ima pješčani i plitki ulaz, savršeno za vašeg psa da se sigurno ohladi u vrućim danima.">
+                    <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=600&q=80" alt="Pas">
+                    <div class="slika-opis"><span>Ljubimci</span>Kupalište za pse</div>
+                </div>
+                <div class="slika-kutija" data-kategorija="hrana" data-kat-id="hrana" data-opis-dugi="Restorani uz samu obalu nude svježu pastrvu iz Mrežnice sa žara, uz krumpir i blitvu. Tradicija krškog kraja.">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" alt="Hrana">
+                    <div class="slika-opis"><span>Gastro</span>Domaća hrana uz rijeku</div>
+                </div>
+                <div class="slika-kutija" data-kategorija="smjestaj" data-kat-id="smjestaj" data-opis-dugi="Probudite se uz zvukove rijeke. Naše drvene kućice glamping stila nude potpuni komfor usred šume.">
+                    <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=600&q=80" alt="Kamp">
+                    <div class="slika-opis"><span>Odmor</span>Drvene kućice</div>
+                </div>
+                <div class="slika-kutija" data-kategorija="slapovi" data-kat-id="slapovi" data-opis-dugi="Mreža manjih slapova koja se račva u više tokova tvoreći predivne male 'otoke' idealne za izležavanje.">
+                    <img src="https://images.unsplash.com/photo-1546587348-d12660c30c50?auto=format&fit=crop&w=600&q=80" alt="Slap">
+                    <div class="slika-opis"><span>Slapovi</span>Otok Ljubavi</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="razdjelnik"></div>
+
+        <section id="kontakt">
+            <h2>Kontakt i <span>Lokacija</span></h2>
+            <div class="sekcija-tekst" style="margin-bottom: 20px; padding: 20px;">Imate pitanje ili se želite učlaniti u udrugu? Ispunite formu ili nas pronađite na karti.</div>
+            
+            <div class="kontakt-grid">
+                <!-- Forma -->
+                <div>
+                    <form class="kontakt-forma" onsubmit="event.preventDefault(); alert('Vaša poruka je uspješno poslana! Odgovorit ćemo u roku 24 sata.'); this.reset();">
+                        <input type="text" placeholder="Vaše Ime i Prezime" required>
+                        <input type="email" placeholder="Vaša Email Adresa" required>
+                        <textarea placeholder="Napišite nam poruku, upit za smještaj ili dozvolu..." required></textarea>
+                        <button type="submit" class="btn-submit"><i class="fa-solid fa-paper-plane"></i> Pošalji Poruku</button>
+                    </form>
+                </div>
+                <!-- Info i Karta -->
+                <div class="kontakt-info">
+                    <h3>Naša Baza</h3>
+                    <div class="info-red"><i class="fa-solid fa-location-dot"></i><span>Jozefinska cesta 25, 47250 Duga Resa</span></div>
+                    <div class="info-red"><i class="fa-solid fa-phone"></i><span>+385 (0)99 123 4567</span></div>
+                    <div class="info-red"><i class="fa-solid fa-envelope"></i><span>info@mreznica-klub.hr</span></div>
+                    
+                    <!-- Karta -->
+                    <iframe class="karta" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d89759.56942055627!2d15.42398460592815!3d45.452654316049075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4764263f3cc61ec9%3A0xc391ebcf8e81881!2sDuga%20Resa!5e0!3m2!1shr!2shr!4v1700000000000!5m2!1shr!2shr" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-stupac">
+                    <h3>O nama</h3>
+                    <p>Udruga zaljubljenika u Mrežnicu. Naš cilj je očuvati rijeku čistom, slobodnom i netaknutom za sve buduće generacije čuvara.</p>
+                </div>
+                <div class="footer-stupac">
+                    <h3>Korisni linkovi</h3>
+                    <p><a href="#pravila" style="color:var(--siva); text-decoration:none;">Pravila ponašanja</a></p>
+                    <p><a href="#galerija" style="color:var(--siva); text-decoration:none;">Naš album</a></p>
+                    <p><a href="#kontakt" style="color:var(--siva); text-decoration:none;">Kontakt centar</a></p>
+                </div>
+                <div class="footer-stupac">
+                    <h3>Pratite nas</h3>
+                    <p>Postanite dio naše zelene obitelji na mrežama i sudjelujte u akcijama.</p>
+                    <div class="socijalne-mreze">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="godina-footer"></span> Čuvari Mrežnice. Sva prava pridržana.</p>
+                <div class="brojac-posjeta">
+                    <i class="fa-solid fa-users"></i> Ukupno posjeta: <span id="broj-posjeta">...</span>
+                </div>
+            </div>
+        </footer>
+    </div> <!-- Kraj glavnog sadrzaja -->
+
+    <!-- OVERLAY ZA DETALJE KATEGORIJA (Skriven prema zadanim postavkama) -->
+    <div id="kat-overlay" class="kat-overlay">
+        <div class="kat-overlay-header">
+            <button class="nazad-btn" id="zatvori-kategoriju"><i class="fa-solid fa-arrow-left"></i> Nazad na odabir</button>
+        </div>
+        <div class="kat-overlay-content">
+            <h2 class="kat-overlay-naslov" id="overlay-naslov">Naslov</h2>
+            <div class="kat-overlay-tekst" id="overlay-tekst">Tekst...</div>
+            
+            <h3 style="color: var(--smaragdna); margin-bottom: 20px; text-align: left;">Galerija kategorije:</h3>
+            <div class="slider-wrapper">
+                <img id="slider-slika" class="slider-slika" src="" alt="Slider">
+                <button class="slider-btn slider-prev" onclick="promijeniSlajd(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-btn slider-next" onclick="promijeniSlajd(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="slider-indikatori" id="slider-indikatori"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL (Zaseban, poboljšan s navigacijom i linkom) -->
+    <div id="lightbox" class="lightbox">
+        <!-- ZATVORI GUMB (Sada fiksiran gore desno) -->
+        <span class="lightbox-zatvori" id="lightbox-zatvori"><i class="fa-solid fa-xmark"></i></span>
+        
+        <div class="lightbox-sadrzaj">
+            <!-- STRELICE ZA LISTANJE -->
+            <button class="lb-strelica lb-prev" id="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="lb-strelica lb-next" id="lb-next"><i class="fa-solid fa-chevron-right"></i></button>
+            
+            <img class="lightbox-slika" id="lightbox-slika" src="" alt="Pregled slike">
+            
+            <!-- OPIS I LINK -->
+            <div class="lightbox-info">
+                <div class="lightbox-naslov" id="lightbox-naslov">Naslov</div>
+                <div class="lightbox-tekst" id="lightbox-tekst">Opis slike...</div>
+                <button class="lightbox-link-btn" id="lightbox-kategorija-link">Saznaj više o ovoj kategoriji <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MALE ŽABICE KOJE SKAČU -->
+    <div class="zabe-kontejner">
+        <i class="fa-solid fa-frog zaba zaba1"></i>
+        <i class="fa-solid fa-frog zaba zaba2"></i>
+        <i class="fa-solid fa-frog zaba zaba3"></i>
+    </div>
+
+    <script>
+        // --- 1. MOBILNI IZBORNIK ---
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("nav-menu");
+        const body = document.querySelector("body");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+            body.style.overflow = navMenu.classList.contains("active") ? "hidden" : "auto";
+        });
+        document.querySelectorAll(".nav-link").forEach(link => {
+            link.addEventListener("click", () => {
+                hamburger.classList.remove("active"); navMenu.classList.remove("active"); body.style.overflow = "auto";
+            });
+        });
+
+        // Zaglavlje scroll
+        const header = document.getElementById("glavno-zaglavlje");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) header.classList.add("skrolano");
+            else header.classList.remove("skrolano");
+        });
+
+        // --- 2. VRIJEME I BROJAČ POSJETA ---
+        function osvjeziVrijeme() {
+            const sada = new Date();
+            let formatiranDatum = sada.toLocaleDateString('hr-HR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            formatiranDatum = formatiranDatum.charAt(0).toUpperCase() + formatiranDatum.slice(1);
+            document.getElementById("datum-godina").innerHTML = `<i class="fa-solid fa-calendar-day" style="color: var(--smaragdna);"></i> ${formatiranDatum}`;
+            document.getElementById("sat").innerHTML = `<i class="fa-regular fa-clock"></i> ${String(sada.getHours()).padStart(2, '0')}:${String(sada.getMinutes()).padStart(2, '0')}`;
+            document.getElementById("godina-footer").innerText = sada.getFullYear();
+        }
+        setInterval(osvjeziVrijeme, 1000); osvjeziVrijeme();
+
+        // Brojač posjeta (Korištenje LocalStorage za simulaciju)
+        let posjete = localStorage.getItem('mrez_posjete_novo');
+        if(!posjete) posjete = 0; // Krece od nule za novi pocetak
+        posjete = parseInt(posjete) + 1; // Povecavaj za 1
+        localStorage.setItem('mrez_posjete_novo', posjete);
+        
+        // Formatiranje da uvijek ima barem 4 znamenke
+        let posjetePrikaz = String(posjete).padStart(4, '0');
+        document.getElementById('broj-posjeta').innerText = posjetePrikaz;
+
+        // --- 3. RADIO PLAYER ---
+        const radioBtn = document.getElementById("radio-btn");
+        const vizualizator = document.getElementById("radio-vizualizator");
+        const audioMreznica = new Audio('https://assets.mixkit.co/active_storage/sfx/2433/2433-84.wav');
+        audioMreznica.loop = true;
+        let svira = false;
+
+        radioBtn.addEventListener("click", () => {
+            svira = !svira;
+            if(svira) {
+                radioBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Isključi Radio';
+                radioBtn.style.background = "#fff"; radioBtn.style.color = "var(--crna)";
+                vizualizator.classList.add("aktivno");
+                audioMreznica.play().catch(e => console.log("Auto-play blocked"));
+            } else {
+                radioBtn.innerHTML = '<i class="fa-solid fa-play"></i> Slušaj uživo';
+                radioBtn.style.background = "var(--smaragdna)"; radioBtn.style.color = "var(--crna)";
+                vizualizator.classList.remove("aktivno");
+                audioMreznica.pause();
+            }
+        });
+
+        // --- 4. PODACI ZA KATEGORIJE (Za Overlay) ---
+        const kategorijeBaza = {
+            'slapovi': {
+                naslov: '<i class="fa-solid fa-water"></i> Slapovi Mrežnice',
+                tekst: '<p>Mrežnica je s pravom poznata kao "rijeka sa stotinu slapova". Iako ih službeno ima 93 (sedrenih barijera), svaki nudi drugačiji doživljaj. Najpoznatiji je Slap Šušnjar, no uzvodno ćete pronaći netaknute kaskade koje tvore prirodne hidromasažne bazene.</p><p><strong>Napomena:</strong> Hodanje po samim sedrenim barijerama (vrhu slapa gdje raste mahovina) je strogo zabranjeno jer je sedra vrlo krhka i živa struktura. Uživajte u bazenima ispod njih!</p>',
+                slike: ['https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1200&q=80', 'https://images.unsplash.com/photo-1546587348-d12660c30c50?auto=format&fit=crop&w=1200&q=80']
+            },
+            'kupalista': {
+                naslov: '<i class="fa-solid fa-umbrella-beach"></i> Najbolja Kupališta',
+                tekst: '<p>Od Duge Rese pa sve do gornjeg toka kod Generalskog Stola, Mrežnica nudi savršena mjesta za kupanje. Voda ljeti dostiže ugodnih 24°C do 26°C.</p><p>Popularna mjesta uključuju "Otok Ljubavi", kupalište u Zvečaju te brojne skrivene uvale do kojih je najlakše doći kanuom.</p>',
+                slike: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80']
+            },
+            'hrana': {
+                naslov: '<i class="fa-solid fa-utensils"></i> Gastro Ponuda',
+                tekst: '<p>Uz samu rijeku nalaze se obiteljski restorani i mlinovi pretvoreni u konobe. Specijalitet kuće je gotovo svugdje - svježa pastrva sa žara. Uz to, lokalni OPG-ovi nude vrhunske sireve, domaći kruh i craft piva.</p>',
+                slike: ['https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80']
+            },
+            'smjestaj': {
+                naslov: '<i class="fa-solid fa-campground"></i> Odmor i Smještaj',
+                tekst: '<p>Za potpuni reset preporučujemo noćenje. Možete birati između luksuznog glampinga, drvenih robinzonskih kućica ili klasičnog kampiranja sa šatorom u uređenim kampovima. Zvuk rijeke po noći je najbolja terapija.</p>',
+                slike: ['https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=1200&q=80', 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=1200&q=80']
+            },
+            'ljubimci': {
+                naslov: '<i class="fa-solid fa-dog"></i> Psi na Mrežnici',
+                tekst: '<p>Mrežnica je "Dog Friendly" rijeka! Većina kupališta ima odvojene plitke dijelove gdje psi mogu uživati u plivanju i bacanju loptica. Molimo vlasnike da pse drže na oku zbog labudova i drugih životinja.</p>',
+                slike: ['https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=1200&q=80']
+            },
+            'ribolov': {
+                naslov: '<i class="fa-solid fa-fish"></i> Za Ribolovce',
+                tekst: '<p>Bogata štukom, klenom, podustom i pastrvom. Dnevne i godišnje dozvole se mogu kupiti online ili u prostorijama lokalnog društva. Režim "Uhvati i pusti" primjenjuje se na većinu plemenitih vrsta kako bismo sačuvali fond.</p>',
+                slike: ['https://images.unsplash.com/photo-1508182314998-3bd49473002f?auto=format&fit=crop&w=1200&q=80']
+            },
+            'dogadanja': {
+                naslov: '<i class="fa-solid fa-calendar-days"></i> Događanja ljeti',
+                tekst: '<p>Tijekom srpnja i kolovoza obala oživi. Gledajte filmove na otvorenom iz kanua, sudjelujte u utrkama na luftićima ili slušajte akustične svirke uz logorsku vatru petkom navečer.</p>',
+                slike: ['https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1200&q=80']
+            },
+            'akcije': {
+                naslov: '<i class="fa-solid fa-hand-holding-heart"></i> Eko Akcije',
+                tekst: '<p>Naš ponos! Dvaput godišnje ronilački klubovi i volonteri čiste dno i obale. Pridružite nam se i dobit ćete besplatan obrok, majicu kluba i osjećaj da ste učinili nešto sjajno za prirodu.</p>',
+                slike: ['https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1200&q=80']
+            }
+        };
+
+        // --- OVERLAY LOGIKA I SLIDER ---
+        const katKartice = document.querySelectorAll('.kat-kartica');
+        const overlay = document.getElementById('kat-overlay');
+        const overlayZatvori = document.getElementById('zatvori-kategoriju');
+        let trenutniSlajdIndex = 0;
+        let trenutneSlike = [];
+
+        // Otvaranje Overlay-a
+        function otvoriKategoriju(katId) {
+            const podaci = kategorijeBaza[katId];
+            if(!podaci) return;
+
+            document.getElementById('overlay-naslov').innerHTML = podaci.naslov;
+            document.getElementById('overlay-tekst').innerHTML = podaci.tekst;
+            trenutneSlike = podaci.slike;
+            trenutniSlajdIndex = 0;
+            
+            prikaziSlajd();
+            postaviIndikatore();
+
+            overlay.classList.add('aktivno');
+            body.style.overflow = "hidden"; // Onemoguci scroll pozadine
+        }
+
+        katKartice.forEach(kartica => {
+            kartica.addEventListener('click', () => {
+                otvoriKategoriju(kartica.getAttribute('data-kat-id'));
+            });
+        });
+
+        // Zatvaranje
+        overlayZatvori.addEventListener('click', () => {
+            overlay.classList.remove('aktivno');
+            body.style.overflow = "auto";
+        });
+
+        // Slider Funkcije
+        function prikaziSlajd() {
+            if(trenutneSlike.length === 0) return;
+            const imgEl = document.getElementById('slider-slika');
+            imgEl.src = trenutneSlike[trenutniSlajdIndex];
+            
+            // Sakrij strelice ako ima samo 1 slika
+            const btnPrev = document.querySelector('.slider-prev');
+            const btnNext = document.querySelector('.slider-next');
+            if(trenutneSlike.length <= 1) {
+                btnPrev.style.display = 'none'; btnNext.style.display = 'none';
+            } else {
+                btnPrev.style.display = 'flex'; btnNext.style.display = 'flex';
+            }
+            azurirajIndikatore();
+        }
+
+        function promijeniSlajd(smjer) {
+            trenutniSlajdIndex += smjer;
+            if (trenutniSlajdIndex >= trenutneSlike.length) trenutniSlajdIndex = 0;
+            if (trenutniSlajdIndex < 0) trenutniSlajdIndex = trenutneSlike.length - 1;
+            prikaziSlajd();
+        }
+
+        function postaviIndikatore() {
+            const kontejner = document.getElementById('slider-indikatori');
+            kontejner.innerHTML = '';
+            if(trenutneSlike.length <= 1) return;
+            
+            trenutneSlike.forEach((_, index) => {
+                const tocka = document.createElement('div');
+                tocka.classList.add('sl-tocka');
+                tocka.addEventListener('click', () => {
+                    trenutniSlajdIndex = index;
+                    prikaziSlajd();
+                });
+                kontejner.appendChild(tocka);
+            });
+            azurirajIndikatore();
+        }
+
+        function azurirajIndikatore() {
+            const tocke = document.querySelectorAll('.sl-tocka');
+            tocke.forEach((t, i) => {
+                if(i === trenutniSlajdIndex) t.classList.add('aktivna');
+                else t.classList.remove('aktivna');
+            });
+        }
+
+        // --- 5. POBOLJŠANA GALERIJA (LIGHTBOX S LISTANJEM) ---
+        const filterGumbi = document.querySelectorAll('.filter-btn');
+        const sveSlikeKutije = Array.from(document.querySelectorAll('.slika-kutija'));
+        let aktivneSlikeDOM = [...sveSlikeKutije]; // Array vidljivih slika za listanje
+        let lightboxIndex = 0;
+
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-slika');
+        const lbNaslov = document.getElementById('lightbox-naslov');
+        const lbTekst = document.getElementById('lightbox-tekst');
+        const lbLink = document.getElementById('lightbox-kategorija-link');
+
+        // Filtriranje
+        filterGumbi.forEach(gumb => {
+            gumb.addEventListener('click', () => {
+                filterGumbi.forEach(btn => btn.classList.remove('aktivno'));
+                gumb.classList.add('aktivno');
+                const kategorija = gumb.getAttribute('data-filter');
+
+                aktivneSlikeDOM = []; // Resetiraj aktivne za lightbox strelice
+
+                sveSlikeKutije.forEach(slika => {
+                    if (kategorija === 'sve' || slika.getAttribute('data-kategorija') === kategorija) {
+                        slika.style.display = 'block';
+                        aktivneSlikeDOM.push(slika);
+                    } else {
+                        slika.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Otvaranje Lightboxa
+        sveSlikeKutije.forEach((kutija) => {
+            kutija.addEventListener('click', () => {
+                lightboxIndex = aktivneSlikeDOM.indexOf(kutija); // Nađi index kliknute u filtriranom nizu
+                prikaziLightboxSliku();
+                lightbox.classList.add('aktivan');
+                body.style.overflow = "hidden";
+            });
+        });
+
+        function prikaziLightboxSliku() {
+            const trenutnaKutija = aktivneSlikeDOM[lightboxIndex];
+            if(!trenutnaKutija) return;
+
+            const imgSrs = trenutnaKutija.querySelector('img').src;
+            const kratkiOpis = trenutnaKutija.querySelector('.slika-opis').innerText.split('\n').pop();
+            const dugiOpis = trenutnaKutija.getAttribute('data-opis-dugi');
+            const targetKatId = trenutnaKutija.getAttribute('data-kat-id');
+
+            lbImg.src = imgSrs;
+            lbNaslov.innerText = kratkiOpis;
+            lbTekst.innerText = dugiOpis;
+            
+            // Postavi onClick na gumb u lightboxu da otvori Overlay kategorije
+            lbLink.onclick = () => {
+                zatvoriLightbox();
+                otvoriKategoriju(targetKatId);
+            };
+        }
+
+        // Navigacija Lightbox (Strelice)
+        document.getElementById('lb-prev').addEventListener('click', (e) => {
+            e.stopPropagation(); // Spriječi klik na pozadinu
+            lightboxIndex--;
+            if(lightboxIndex < 0) lightboxIndex = aktivneSlikeDOM.length - 1;
+            prikaziLightboxSliku();
+        });
+
+        document.getElementById('lb-next').addEventListener('click', (e) => {
+            e.stopPropagation();
+            lightboxIndex++;
+            if(lightboxIndex >= aktivneSlikeDOM.length) lightboxIndex = 0;
+            prikaziLightboxSliku();
+        });
+
+        // Zatvaranje Lightboxa (X ili klik na pozadinu)
+        function zatvoriLightbox() {
+            lightbox.classList.remove('aktivan');
+            body.style.overflow = "auto";
+        }
+        document.getElementById('lightbox-zatvori').addEventListener('click', zatvoriLightbox);
+        lightbox.addEventListener('click', (e) => {
+            // Zatvori samo ako se klikne na tamnu pozadinu, a ne na sliku ili box
+            if (e.target === lightbox || e.target.classList.contains('lightbox-sadrzaj')) {
+                zatvoriLightbox();
+            }
+        });
+
+        // --- 6. ANIMACIJA VODENIH ČESTICA (HERO CANVAS) ---
+        const canvas = document.getElementById("hero-canvas");
+        const ctx = canvas.getContext("2d");
+        let particlesArray = [];
+        let canvasWidth = canvas.width = canvas.offsetWidth;
+        let canvasHeight = canvas.height = canvas.offsetHeight;
+
+        const mouse = { x: null, y: null, radius: 120 };
+        window.addEventListener('mousemove', function(e) { const rect = canvas.getBoundingClientRect(); mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top; });
+        window.addEventListener('resize', function() { canvasWidth = canvas.width = canvas.offsetWidth; canvasHeight = canvas.height = canvas.offsetHeight; inicijalizirajCestice(); });
+
+        class Cestica {
+            constructor(x, y) {
+                this.x = x; this.y = y; this.size = Math.random() * 3 + 1;
+                this.baseX = this.x; this.baseY = this.y;
+                this.density = (Math.random() * 30) + 10;
+                this.vjetar = Math.random() * 0.2 - 0.1;
+            }
+            nacrtaj() {
+                ctx.fillStyle = 'rgba(0, 223, 130, 0.5)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.closePath(); ctx.fill();
+            }
+            azuriraj() {
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+                let udaljenost = Math.hypot(dx, dy);
+                if (udaljenost < mouse.radius) {
+                    let sila = (mouse.radius - udaljenost) / mouse.radius;
+                    this.x -= (dx / udaljenost) * sila * this.density;
+                    this.y -= (dy / udaljenost) * sila * this.density;
+                } else {
+                    if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 20;
+                    if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 20;
+                }
+                this.baseX += this.vjetar;
+                if (this.baseX < 0 || this.baseX > canvasWidth) this.vjetar *= -1;
+            }
+        }
+        function inicijalizirajCestice() {
+            particlesArray = []; let broj = Math.min((canvasWidth * canvasHeight) / 10000, 150);
+            for (let i = 0; i < broj; i++) particlesArray.push(new Cestica(Math.random() * canvasWidth, Math.random() * canvasHeight));
+        }
+        function animirajCanvas() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            particlesArray.forEach(c => { c.azuriraj(); c.nacrtaj(); });
+            requestAnimationFrame(animirajCanvas);
+        }
+        inicijalizirajCestice(); animirajCanvas();
+
+    </script>
 </body>
 </html>
