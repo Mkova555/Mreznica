@@ -17,13 +17,6 @@
                     <span id="sat" class="sat-uzivo">00:00:00</span>
                 </div>
             </div>
-
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Početna</a></li>
                 <li><a href="autenticnost.html" class="nav-link">Autentičnost</a></li>
@@ -36,33 +29,14 @@
         </nav>
     </header>
 
-    <section id="clanovi" class="sekcija-zelena">
+    <section>
         <div class="clanovi-kontejner">
-            <div id="login-blok" class="login-kutija">
-                <h2>Portal za Članove</h2>
-                <form id="forma-login" class="forma-login">
-                    <input type="text" id="korisnik-ime" placeholder="Vaše ime / Korisničko ime" required>
-                    <input type="password" placeholder="Lozinka" required>
-                    <button type="submit" class="zeleni-btn">Prijavi se</button>
-                </form>
-            </div>
-
-            <div id="clanski-karton" class="clanska-iskaznica-prikaz" style="display: none;">
-                <h2>Dobrodošli natrag!</h2>
-                <div class="iskaznica-kartica">
-                    <div class="iskaznica-zaglavlje">
-                        <span>Digitalna Iskaznica</span>
-                        <span class="neon-zelena">AKTIVAN ČLAN</span>
-                    </div>
-                    <div class="iskaznica-tijelo">
-                        <div class="clan-podaci">
-                            <span class="clan-label">Član kluba:</span>
-                            <span id="clan-ime-prikaz" class="clan-vrijednost">Ime</span>
-                        </div>
-                    </div>
-                </div>
-                <button id="odjava-gumb" class="zeleni-btn">Odjavi se</button>
-            </div>
+            <h2>Portal za Članove</h2>
+            <form class="forma-login" onsubmit="event.preventDefault();">
+                <input type="text" placeholder="Vaše ime / Korisničko ime" required>
+                <input type="password" placeholder="Lozinka" required>
+                <button type="submit" class="zeleni-btn">Prijavi se</button>
+            </form>
         </div>
     </section>
 
@@ -79,7 +53,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <span id="godina-footer">2026</span> Udruga Čuvari Mrežnice.</p>
+            <p>&copy; 2026 Udruga Čuvari Mrežnice. | Design by <strong>Martina Kovačić</strong></p>
         </div>
     </footer>
 
