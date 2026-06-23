@@ -1,169 +1,97 @@
 /* ==========================================
-   KOVA-DESIGN PREMIUM EMERALD MASTER STIL
+   DODATAK: WP STIL PORTFOLIA & LOGIN FORMA
    ========================================== */
 
-:root {
-    --smaragd-tamni: #01693e;
-    --smaragd-svijetli: #00a86b;
-    --smaragd-sjaj: rgba(0, 168, 107, 0.2);
-    --tekst-glavni: #f5f8f6;
-    --tekst-sivi: #a5b7ae;
-    --staklo-crno: rgba(6, 10, 8, 0.88);
-    --staklo-kartica: rgba(14, 22, 17, 0.75);
-    --crvena-neon: #ff3b30;
-    --tranzicija: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+/* Specifično pozicioniranje za login stranicu da bude na sredini ekrana */
+.stranica-prijava {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #030504; /* Prava crna baza */
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+.login-sekcija {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 5% 60px;
 }
 
-/* STATIČNA POZADINA PRIRODE KOJA SE NE POMIČE */
-html, body {
-    background-image: linear-gradient(rgba(3, 6, 4, 0.9), rgba(3, 6, 4, 0.93)), 
-                      url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1920&q=80');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    color: var(--tekst-glavni);
-    overflow-x: hidden;
-    line-height: 1.6;
-}
-
-/* NASLOVI */
-h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; }
-h2 {
-    font-size: 2.5rem;
+.login-kartica {
+    background: #0a0f0c;
+    border: 1px solid rgba(0, 179, 89, 0.3); /* Zeleni obrub */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(0, 179, 89, 0.1);
+    padding: 50px 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
     text-align: center;
+}
+
+.login-kartica h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.login-opis {
+    color: #888;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.forma-login {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+}
+
+.input-grupa label {
+    display: block;
+    color: #aaa;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #ffffff 40%, var(--tekst-sivi) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 40px;
+    letter-spacing: 1px;
 }
 
-/* FIXNA NAVIGACIJA */
-.glavno-zaglavlje {
-    position: fixed; top: 0; width: 100%;
-    background: rgba(4, 8, 5, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    z-index: 1000;
-}
-nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; max-width: 1400px; margin: 0 auto; }
-.logo { font-size: 22px; font-weight: 900; color: white; text-decoration: none; letter-spacing: 2px; }
-.logo::after { content: '.'; color: var(--smaragd-svijetli); }
-.header-vrijeme { font-size: 11px; color: var(--tekst-sivi); margin-top: 3px; }
-.sat-uzivo { color: var(--smaragd-svijetli); margin-left: 6px; font-weight: bold; }
-
-.nav-menu { display: flex; list-style: none; gap: 25px; }
-.nav-link { 
-    text-decoration: none; color: var(--tekst-sivi); font-weight: 600; font-size: 13px; 
-    text-transform: uppercase; letter-spacing: 1px; transition: var(--tranzicija);
-}
-.nav-link:hover, .nav-link.aktivni { color: var(--smaragd-svijetli); }
-
-/* HERO SEKCIJA I STRANICE */
-.hero-sekcija { padding: 130px 5% 50px; max-width: 1200px; margin: 0 auto; text-align: center; }
-.hero-sadrzaj h1 {
-    font-size: 4.2rem; line-height: 1.1; margin-bottom: 15px;
-    background: linear-gradient(to bottom, #ffffff 40%, #a2bcae) 100%;
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.hero-sadrzaj p { font-size: 1.2rem; color: var(--tekst-sivi); max-width: 600px; margin: 0 auto 25px; }
-
-/* SEKCIJE UNUTAR STRANICA */
-section { padding: 120px 5% 60px; max-width: 1200px; margin: 0 auto; }
-.sadrzaj-tekst { max-width: 750px; margin: 0 auto 40px; text-align: center; color: var(--tekst-sivi); font-size: 1.2rem; }
-.sadrzaj-tekst strong { color: white; }
-
-/* GRID SISTEMI */
-.widget-traka, .ribolov-grid, .kategorije-grid, .pravila-kontejner { 
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 30px auto; 
+.forma-login input {
+    width: 100%;
+    padding: 14px 16px;
+    background: #040605;
+    border: 1px solid #222;
+    color: white;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
-/* PREMIUM STAKLENE KARTICE */
-.widget-stavka, .ribolov-kartica, .kat-kartica, .pravilo-blok {
-    background: var(--staklo-kartica); padding: 30px; border-radius: 18px; 
-    border: 1px solid rgba(255,255,255,0.03); backdrop-filter: blur(8px);
-    transition: var(--tranzicija); text-align: left;
-}
-.widget-stavka:hover, .ribolov-kartica:hover, .kat-kartica:hover { 
-    border-color: var(--smaragd-svijetli); box-shadow: 0 10px 30px var(--smaragd-sjaj); transform: translateY(-4px);
+.forma-login input:focus {
+    outline: none;
+    border-color: #00b359;
+    box-shadow: 0 0 10px rgba(0, 179, 89, 0.2);
 }
 
-.widget-oznaka { display: block; font-size: 11px; color: var(--tekst-sivi); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
-.widget-vrijednost { font-size: 1.9rem; font-weight: 800; color: white; }
-.neon-zelena { color: var(--smaragd-svijetli); }
-.widget-opis { font-size: 12px; color: var(--tekst-sivi); display: block; margin-top: 6px; }
-
-/* AUTOMATSKI FOTO SLIDER */
-.slider-kontejner {
-    position: relative; max-width: 1000px; height: 450px; margin: 40px auto 20px;
-    border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+.skrivena-poruka {
+    display: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
 }
-.slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
-.slide.active { opacity: 1; }
-.slide img { width: 100%; height: 100%; object-fit: cover; }
-.slide-tekst {
-    position: absolute; bottom: 0; left: 0; width: 100%; padding: 35px;
-    background: linear-gradient(to top, rgba(3,6,4,0.95), transparent); text-align: left;
-}
-.slide-tekst h3 { font-size: 1.6rem; color: white; margin-bottom: 5px; }
-.slide-tekst p { color: var(--tekst-sivi); font-size: 0.95rem; }
 
-/* PRAVILA PONAŠANJA */
-.dozvoljeno { border-top: 4px solid var(--smaragd-svijetli); }
-.zabranjeno { border-top: 4px solid var(--crvena-neon); }
-.pravilo-blok ul { list-style: none; margin-top: 15px; }
-.pravilo-blok li { margin-bottom: 10px; color: var(--tekst-sivi); position: relative; padding-left: 15px; }
-.pravilo-blok li::before { content: "•"; position: absolute; left: 0; color: white; }
-
-/* FOTOALBUM STRANICA */
-.album-filteri { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 35px; }
-.filter-gumb { 
-    background: transparent; color: var(--tekst-sivi); border: 1px solid rgba(255,255,255,0.08); 
-    padding: 9px 22px; border-radius: 30px; cursor: pointer; transition: var(--tranzicija); font-weight: 600; 
+.skrivena-poruka.greska {
+    display: block;
+    background: rgba(255, 56, 96, 0.1);
+    color: #ff3860;
+    border: 1px solid rgba(255, 56, 96, 0.3);
 }
-.filter-gumb.aktivno, .filter-gumb:hover { background: white; color: black; border-color: white; }
-.galerija-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-.galerija-stavka { position: relative; border-radius: 14px; overflow: hidden; height: 240px; }
-.galerija-stavka img { width: 100%; height: 100%; object-fit: cover; transition: var(--tranzicija); filter: grayscale(15%); }
-.galerija-stavka:hover img { transform: scale(1.04); filter: grayscale(0%); }
-.galerija-naslov { position: absolute; bottom: 0; background: linear-gradient(to top, rgba(4,6,5,0.9), transparent); width: 100%; padding: 15px; color: white; font-weight: 600; }
 
-/* ČLANOVI FORMA (PREMIUM RE-DESIGN) */
-.clanovi-kontejner { 
-    max-width: 400px; margin: 40px auto; background: var(--staklo-kartica); 
-    padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.04);
-}
-.forma-login { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
-.forma-login input { 
-    padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); 
-    background: rgba(0,0,0,0.2); color: white; font-size: 14px; transition: var(--tranzicija); 
-}
-.forma-login input:focus { outline: none; border-color: var(--smaragd-svijetli); box-shadow: 0 0 15px var(--smaragd-sjaj); }
-.zeleni-btn { 
-    background: transparent; border: 1px solid var(--smaragd-svijetli); padding: 15px; border-radius: 30px; 
-    font-weight: 700; cursor: pointer; color: white; text-transform: uppercase; letter-spacing: 1px; transition: var(--tranzicija); 
-}
-.zeleni-btn:hover { background: var(--smaragd-svijetli); color: black; box-shadow: 0 0 20px var(--smaragd-sjaj); }
-
-/* FOOTER */
-footer { background: rgba(2, 4, 3, 0.95); padding: 50px 5% 25px; border-top: 1px solid rgba(255, 255, 255, 0.03); margin-top: 50px; }
-.footer-sadrzaj { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; max-width: 1000px; margin: 0 auto 30px; }
-.footer-stupac h3 { font-size: 1rem; color: white; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-.footer-stupac p { color: var(--tekst-sivi); font-size: 14px; }
-.footer-bottom { text-align: center; color: var(--tekst-sivi); font-size: 13px; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 20px; }
-.footer-bottom strong { color: var(--smaragd-svijetli); font-weight: 600; }
-
-@media (max-width: 768px) {
-    .hero-sadrzaj h1 { font-size: 2.5rem; }
-    .slider-kontejner { height: 300px; }
-    .nav-menu { display: none; } /* Pojednostavljeno za mobilne radi lakšeg korištenja */
+.skrivena-poruka.uspjeh {
+    display: block;
+    background: rgba(0, 179, 89, 0.1);
+    color: #00b359;
+    border: 1px solid rgba(0, 179, 89, 0.3);
 }
