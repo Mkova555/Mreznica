@@ -87,10 +87,15 @@
 
         .nav-desno { display: flex; align-items: center; gap: 25px; }
         
-        /* Language switcher */
-        .jezik-switch { display: flex; flex-direction: column; gap: 4px; color: var(--siva); font-size: 0.85rem; font-weight: bold; border-right: 1px solid rgba(255,255,255,0.2); padding-right: 20px; text-align: center; }
-        .jezik-switch span { cursor: pointer; transition: 0.3s; line-height: 1; }
-        .jezik-switch span:hover, .jezik-switch span.aktivan { color: var(--smaragdna); text-shadow: 0 0 8px var(--smaragdna-glow); }
+        /* Language switcher - UREĐENO (Pill dizajn) */
+        .jezik-switch { 
+            display: flex; flex-direction: row; align-items: center; gap: 5px; 
+            background: rgba(0,0,0,0.3); border: 1px solid rgba(0, 223, 130, 0.3); 
+            border-radius: 20px; padding: 4px; color: var(--siva); font-size: 0.85rem; font-weight: bold; 
+        }
+        .jezik-switch span { cursor: pointer; transition: 0.3s; padding: 6px 12px; border-radius: 15px; line-height: 1; }
+        .jezik-switch span:hover { color: var(--bijela); }
+        .jezik-switch span.aktivan { background: var(--smaragdna); color: var(--crna); text-shadow: none; box-shadow: 0 0 10px rgba(0,223,130,0.4); }
 
         .nav-menu { display: flex; list-style: none; gap: 8px; align-items: center; margin: 0; padding: 0; }
         
@@ -267,7 +272,7 @@
         }
 
 
-        .kategorije-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
+        .kategorije-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
         .kat-kartica {
             background: var(--tamno-zelena); padding: 30px; border-radius: 18px; 
             border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); text-align: left;
@@ -325,7 +330,7 @@
         .sl-tocka { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
         .sl-tocka.aktivna { background: var(--smaragdna); box-shadow: 0 0 10px var(--smaragdna); transform: scale(1.2); }
 
-        .pravila-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        .pravila-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
         .pravilo-kutija { background: var(--tamno-zelena); padding: 40px; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .dozvoljeno { border-top: 5px solid var(--smaragdna); } .zabranjeno { border-top: 5px solid var(--crvena); }
         .pravilo-kutija h3 { font-size: 1.6rem; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
@@ -357,7 +362,7 @@
         .galerija-filteri { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
         .filter-btn { padding: 12px 28px; background: rgba(0,0,0,0.6); color: var(--bijela); border: 1px solid rgba(0,223,130,0.3); border-radius: 30px; cursor: pointer; font-weight: bold; transition: 0.3s; backdrop-filter: blur(5px); }
         .filter-btn.aktivno, .filter-btn:hover { background: var(--smaragdna); color: var(--crna); border-color: var(--smaragdna); }
-        .galerija-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .galerija-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
         .slika-kutija { position: relative; border-radius: 18px; overflow: hidden; height: 270px; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
         .slika-kutija img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .slika-kutija:hover img { transform: scale(1.08); }
@@ -390,7 +395,7 @@
         .lightbox-link-btn:hover { background: var(--smaragdna); color: var(--crna); }
 
         footer { background: rgba(4, 6, 5, 0.98); padding: 70px 5% 30px; border-top: 2px solid var(--tamno-zelena); text-align: center; backdrop-filter: blur(10px); margin-top: 80px;}
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; margin-bottom: 40px; text-align: left; max-width: 1200px; margin: 0 auto 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; text-align: left; max-width: 1200px; margin: 0 auto 40px; }
         .footer-stupac h3 { color: var(--smaragdna); margin-bottom: 20px; font-size: 1.4rem; position: relative; padding-bottom: 8px; }
         .footer-stupac h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background-color: var(--smaragdna); }
         .footer-stupac p { color: var(--siva); margin-bottom: 12px; line-height: 1.7; font-size: 0.95rem; }
@@ -426,6 +431,7 @@
         .plutajuci-gumb.btt.vidljivo { opacity: 1; pointer-events: auto; transform: translateY(0); }
         .plutajuci-gumb.btt:hover { background-color: var(--bijela); transform: translateY(-5px); }
 
+        /* OVO JE ISPRAVLJENO STILIZIRANJE ZA MOBITEL ZA STATUS TRAKU */
         @media (max-width: 1024px) {
             .hamburger { display: block; }
             .nav-menu { position: fixed; top: 0; left: -100vw; width: 100vw; height: 100vh; background-color: rgba(7, 11, 9, 0.99); backdrop-filter: blur(15px); flex-direction: column; justify-content: center; gap: 20px; transition: 0.4s ease-in-out; }
@@ -433,23 +439,66 @@
             .nav-link { font-size: 1.5rem; display: block; padding: 10px 20px; }
             .hamburger.active .bar:nth-child(2) { opacity: 0; } .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); } .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
             
-            .mobilni-samo { display: flex; justify-content: center; margin-bottom: 10px; width: 100%; border-bottom: 1px solid rgba(0,223,130,0.3); padding-bottom: 20px; }
+            .mobilni-samo { display: flex; justify-content: center; margin-bottom: 20px; width: 100%; border-bottom: 1px solid rgba(0,223,130,0.3); padding-bottom: 20px; }
             .jezik-switch { display: none; }
-            .jezik-switch-mobilni { display: flex; justify-content: center; gap: 25px; width: 100%; border-bottom: 1px solid rgba(0,223,130,0.3); padding-bottom: 20px; margin-bottom: 10px; }
-            .jezik-switch-mobilni span { color: var(--siva); font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
-            .jezik-switch-mobilni span:hover, .jezik-switch-mobilni span.aktivan { color: var(--smaragdna); text-shadow: 0 0 10px var(--smaragdna-glow); }
             
-            .status-traka { flex-direction: column; padding: 20px; } .status-stavka { border-right: none; border-bottom: 1px solid rgba(0, 223, 130, 0.1); padding: 18px 0; } .status-stavka:last-child { border-bottom: none; }
+            .jezik-switch-mobilni { 
+                display: inline-flex; justify-content: center; align-items: center; gap: 5px; 
+                background: rgba(0,0,0,0.4); border: 1px solid rgba(0, 223, 130, 0.3); 
+                padding: 5px; border-radius: 25px; margin: 0 auto 25px auto; 
+            }
+            .jezik-switch-mobilni span { color: var(--siva); font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.3s; padding: 8px 16px; border-radius: 20px; }
+            .jezik-switch-mobilni span:hover { color: var(--bijela); }
+            .jezik-switch-mobilni span.aktivan { background: var(--smaragdna); color: var(--crna); text-shadow: none; box-shadow: 0 0 10px rgba(0,223,130,0.4); }
+            
+            /* POPRAVAK STATUS TRAKE: Elegantno centriranje i redanje jedno ispod drugog */
+            .status-traka { 
+                flex-direction: column; 
+                padding: 15px 20px; 
+                gap: 0; 
+            } 
+            .status-stavka { 
+                border-right: none; 
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Mekana, lagana linija */
+                padding: 20px 0; 
+                align-items: center; 
+                text-align: center; 
+                width: 100%;
+            } 
+            .status-stavka:first-child { padding-top: 5px; }
+            .status-stavka:last-child { border-bottom: none; padding-bottom: 5px; }
+            
+            /* Osiguravamo da ikona i vrijednost stoje uredno na sredini u svakom redu */
+            .status-vrijednost { justify-content: center; text-align: center; }
+            
+            /* Skraćuje ogroman gumb na mobitelu i centrira ga */
+            .radio-btn { max-width: 250px; margin: 0 auto; }
+            
             .kontakt-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
         }
         
         @media (max-width: 768px) {
-            .hero-sadrzaj h1 { font-size: 2.8rem; word-break: break-word; hyphens: auto; }
-            .hero-sadrzaj h1 span { display: block; margin-top: 5px; } /* Sprječava rezanje teksta prebacivanjem u novi red */
-            .jezik-switch { display: none; } /* Skrivamo u headeru na manjem ekranu radi prostora */
-            .logo { font-size: 26px; }
-            .plutajuci-gumbi { bottom: 15px; right: 15px; }
+            section { padding: 50px 15px; } 
+            h2 { font-size: 2.2rem; margin-bottom: 25px; word-wrap: break-word; overflow-wrap: break-word; } 
+            
+            .hero-sadrzaj { padding: 0 15px; }
+            .hero-sadrzaj h1 { font-size: 2.4rem; word-break: break-word; hyphens: auto; }
+            .hero-sadrzaj p { font-size: 1.1rem; }
+            .hero-sadrzaj h1 span { display: block; margin-top: 5px; } 
+            
+            .sekcija-tekst { padding: 20px 15px; font-size: 1rem; border-radius: 15px; } 
+            .status-traka { width: 100%; border-radius: 15px; margin-top: 30px; }
+            
+            .jezik-switch { display: none; } 
+            .logo { font-size: 22px; }
+            
+            .header-zabice { gap: 8px; margin-left: 10px; } 
+            .header-zaba { font-size: 15px; }
+            .z2 { font-size: 13px; }
+            .z3 { font-size: 17px; }
+            
+            .plutajuci-gumbi { bottom: 15px; right: 15px; gap: 15px; }
             .plutajuci-gumb { width: 45px; height: 45px; font-size: 1.5rem; }
         }
     </style>
@@ -539,7 +588,7 @@
         </section>
 
         <section id="o-rijeci">
-            <h2>Autentičnost <span>& Povijest</span></h2>
+            <h2>Autentično <span>& Povijest</span></h2>
             <div class="sekcija-tekst">
                 <p>Mrežnica nije samo rijeka, ona je fenomen. Sa svojih nevjerojatnih <strong>93 sedrena slapa</strong>, Mrežnica je jedna od najposebnijih krških rijeka u Europi. Njena autentičnost leži u specifičnoj smaragdno-zelenoj boji, netaknutim kanjonima i stoljetnom suživotu čovjeka i prirode. Ovdje su nekada radili brojni mlinovi čiji se ostaci i danas mogu vidjeti.</p>
                 <p>Ona je dom mnogim zaštićenim vrstama, od ptica vodomara do labudova i vidri. <strong>Za ribolovce:</strong> Rijeka je izuzetno bogata ribljim fondom. Molimo sve posjetitelje da poštuju ekosustav.</p>
