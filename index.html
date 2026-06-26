@@ -136,9 +136,9 @@
         }
         .status-stavka { flex: 1; min-width: 220px; padding: 10px 15px; border-right: 1px solid rgba(0, 223, 130, 0.2); display: flex; flex-direction: column; justify-content: center; }
         .status-stavka:last-child { border-right: none; }
-        .status-oznaka { display: block; font-size: 11px; color: var(--siva); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1.5px; font-weight: 700; }
-        .status-vrijednost { font-size: 1.25rem; font-weight: bold; color: var(--bijela); display: flex; align-items: center; gap: 8px; }
-        .status-smaragd { color: var(--smaragdna); font-size: 1.5rem; text-shadow: 0 0 8px var(--smaragdna-glow); }
+        .status-oznaka { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 14px; color: var(--zuta); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1.5px; font-weight: 800; }
+        .status-vrijednost { font-size: 1.7rem; font-weight: bold; color: var(--bijela); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .status-smaragd { color: var(--smaragdna); text-shadow: 0 0 12px var(--smaragdna-glow); }
 
         .radio-btn-kontejner { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
         .radio-btn {
@@ -183,9 +183,9 @@
             opacity: 0;
         }
         
-        .zaba-izron-1 { color: var(--smaragdna); font-size: 32px; left: 30%; animation: zaba-skok 6s infinite 0.5s; }
-        .zaba-izron-2 { color: #2ecc71; font-size: 24px; left: 50%; animation: zaba-skok 7.5s infinite 2s; }
-        .zaba-izron-3 { color: var(--bijela); font-size: 28px; right: 30%; animation: zaba-skok 6.5s infinite 3.5s; }
+        .zaba-izron-1 { color: #0a4f21; font-size: 55px; left: 10%; animation: zaba-skok 6s infinite 0.5s; }
+        .zaba-izron-2 { color: var(--zuta); text-shadow: none; font-size: 45px; left: 45%; animation: zaba-skok 7.5s infinite 2s; }
+        .zaba-izron-3 { color: #556B2F; font-size: 50px; right: 10%; animation: zaba-skok 6.5s infinite 3.5s; }
 
         @keyframes zaba-skok {
             0% { opacity: 0; transform: translateY(40px); }
@@ -216,13 +216,23 @@
             opacity: 0;
         }
 
+        /* Dodatne mušice */
+        .musica-2 {
+            position: absolute;
+            color: #a3b3aa;
+            font-size: 7px;
+            z-index: 11;
+            opacity: 0;
+        }
+
         /* Animacije za prvu žabu */
         .zaba-izron-1 .jezik { animation: izbaci-jezik-1 6s infinite 0.5s; left: 50%; transform: translateX(-50%) rotate(15deg); }
-        .zaba-izron-1 .musica { animation: musica-leti-1 6s infinite 0.5s; top: -40px; right: -20px; }
+        .zaba-izron-1 .musica { animation: musica-leti-1 6s infinite 0.5s; top: -60px; right: -25px; font-size: 10px; }
+        .zaba-izron-1 .musica-2 { animation: musica-leti-1-dodatna 6s infinite 0.7s; top: -40px; right: -40px; font-size: 9px; }
 
         @keyframes izbaci-jezik-1 {
             0%, 40% { height: 0; }
-            45% { height: 45px; } /* Jezik se izdužuje do mušice */
+            45% { height: 75px; } /* Jezik se izdužuje do mušice */
             50%, 100% { height: 0; } /* Jezik se brzo vraća */
         }
         
@@ -235,13 +245,22 @@
             45%, 100% { opacity: 0; } /* Mušica je pojedena */
         }
 
+        @keyframes musica-leti-1-dodatna {
+            0%, 10% { opacity: 0; transform: translate(20px, 0px); }
+            25% { opacity: 1; transform: translate(0px, -10px); }
+            40% { opacity: 1; transform: translate(-10px, 0px); }
+            44% { opacity: 1; transform: translate(-15px, 15px); }
+            45%, 100% { opacity: 0; }
+        }
+
         /* Animacije za drugu žabu (srednja, manja) */
         .zaba-izron-2 .jezik { animation: izbaci-jezik-2 7.5s infinite 2s; left: 50%; transform: translateX(-50%) rotate(-20deg); background-color: #e74c3c;}
-        .zaba-izron-2 .musica { animation: musica-leti-2 7.5s infinite 2s; top: -35px; left: -25px; font-size: 6px; }
+        .zaba-izron-2 .musica { animation: musica-leti-2 7.5s infinite 2s; top: -55px; left: -30px; font-size: 9px; }
+        .zaba-izron-2 .musica-2 { animation: musica-leti-2-dodatna 7.5s infinite 2.3s; top: -70px; left: 15px; font-size: 8px;}
 
         @keyframes izbaci-jezik-2 {
             0%, 55% { height: 0; }
-            60% { height: 40px; }
+            60% { height: 60px; }
             65%, 100% { height: 0; }
         }
 
@@ -253,13 +272,22 @@
             60%, 100% { opacity: 0; }
         }
 
+        @keyframes musica-leti-2-dodatna {
+            0%, 10% { opacity: 0; transform: translate(-20px, -20px); }
+            30% { opacity: 1; transform: translate(10px, 0px); }
+            55% { opacity: 1; transform: translate(5px, 15px); }
+            59% { opacity: 1; transform: translate(10px, 5px); }
+            60%, 100% { opacity: 0; }
+        }
+
         /* Animacije za treću žabu (bijela) */
         .zaba-izron-3 .jezik { animation: izbaci-jezik-3 6.5s infinite 3.5s; left: 50%; transform: translateX(-50%) rotate(5deg); }
-        .zaba-izron-3 .musica { animation: musica-leti-3 6.5s infinite 3.5s; top: -50px; right: -5px; color: #a3b3aa;}
+        .zaba-izron-3 .musica { animation: musica-leti-3 6.5s infinite 3.5s; top: -70px; right: -5px; color: #a3b3aa; font-size: 10px;}
+        .zaba-izron-3 .musica-2 { animation: musica-leti-3-dodatna 6.5s infinite 3.8s; top: -45px; right: 25px; font-size: 9px; }
 
         @keyframes izbaci-jezik-3 {
             0%, 30% { height: 0; }
-            35% { height: 50px; }
+            35% { height: 70px; }
             40%, 100% { height: 0; }
         }
 
@@ -271,8 +299,15 @@
             35%, 100% { opacity: 0; }
         }
 
+        @keyframes musica-leti-3-dodatna {
+            0%, 10% { opacity: 0; transform: translate(15px, -15px); }
+            20% { opacity: 1; transform: translate(-10px, 5px); }
+            30% { opacity: 1; transform: translate(-5px, 10px); }
+            34% { opacity: 1; transform: translate(-5px, 5px); }
+            35%, 100% { opacity: 0; }
+        }
 
-        .kategorije-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
+        .kategorije-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 40px; }
         .kat-kartica {
             background: var(--tamno-zelena); padding: 30px; border-radius: 18px; 
             border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); text-align: left;
@@ -409,6 +444,10 @@
         
         .brojac-posjeta { background: rgba(0, 223, 130, 0.1); border: 1px solid rgba(0, 223, 130, 0.3); padding: 8px 15px; border-radius: 8px; color: var(--smaragdna); font-weight: bold; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
 
+        .prognoza-dani { display: flex; flex-direction: column; gap: 8px; font-size: 1.25rem; line-height: 1.2; text-align: center; font-weight: bold;}
+        .prognoza-dani .danas { font-size: 1.5rem; color: var(--zuta); }
+        .prognoza-dani .sivi-tekst { color: #d1d8d4; font-size: 1.15rem; font-weight: normal; }
+
         /* Plutajući gumbi (WhatsApp & BackToTop) */
         .plutajuci-gumbi {
             position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 30px; z-index: 3500;
@@ -482,6 +521,8 @@
             section { padding: 50px 15px; } 
             h2 { font-size: 2.2rem; margin-bottom: 25px; word-wrap: break-word; overflow-wrap: break-word; } 
             
+            .kategorije-grid { grid-template-columns: 1fr; }
+
             .hero-sadrzaj { padding: 0 15px; }
             .hero-sadrzaj h1 { font-size: 2.4rem; word-break: break-word; hyphens: auto; }
             .hero-sadrzaj p { font-size: 1.1rem; }
@@ -566,13 +607,14 @@
                 </div>
                 <div class="status-stavka">
                     <span class="status-oznaka">Temperatura & Kvaliteta</span>
-                    <span class="status-vrijednost"><i class="fa-solid fa-temperature-half" style="color: var(--smaragdna);"></i> 22°C | <span class="status-smaragd">Izvrsna</span></span>
+                    <span class="status-vrijednost"><i class="fa-solid fa-temperature-half" style="color: var(--smaragdna);"></i> <span style="color: var(--zuta);">22°C</span> <span style="color: var(--siva); font-weight: normal; margin: 0 5px;">|</span> <span class="status-smaragd">Izvrsna</span></span>
                 </div>
                 <div class="status-stavka">
                     <span class="status-oznaka">Prognoza (3 dana)</span>
-                    <span class="status-vrijednost" style="font-size: 0.95rem; line-height: 1.4;">
-                        <span style="display:block;">Danas ☀️ 28°C</span>
-                        <span style="display:block; color:var(--siva);">Sutra ⛅ 26°C | Prek. ☀️ 29°C</span>
+                    <span class="status-vrijednost prognoza-dani">
+                        <span class="danas">Danas ☀️ 28°C</span>
+                        <span class="sivi-tekst">Sutra ⛅ 26°C</span>
+                        <span class="sivi-tekst">Prekosutra ☀️ 29°C</span>
                     </span>
                 </div>
                 <div class="status-stavka">
@@ -593,23 +635,26 @@
                 <p>Mrežnica nije samo rijeka, ona je fenomen. Sa svojih nevjerojatnih <strong>93 sedrena slapa</strong>, Mrežnica je jedna od najposebnijih krških rijeka u Europi. Njena autentičnost leži u specifičnoj smaragdno-zelenoj boji, netaknutim kanjonima i stoljetnom suživotu čovjeka i prirode. Ovdje su nekada radili brojni mlinovi čiji se ostaci i danas mogu vidjeti.</p>
                 <p>Ona je dom mnogim zaštićenim vrstama, od ptica vodomara do labudova i vidri. <strong>Za ribolovce:</strong> Rijeka je izuzetno bogata ribljim fondom. Molimo sve posjetitelje da poštuju ekosustav.</p>
                 
-                <div class="kat-otvori-btn" style="justify-content: center; margin-top: 35px; font-size: 1.1rem;" onclick="otvoriKategoriju('o-rijeci')">
-                    Otvorite fotoalbum i povijest <i class="fa-solid fa-book-open-reader"></i>
+                <div class="kat-otvori-btn" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; margin-top: 35px; font-size: 1.1rem; text-align: center;" onclick="otvoriKategoriju('o-rijeci')">
+                    Otvorite fotoalbum i povijest <i class="fa-solid fa-book-open-reader" style="font-size: 1.6rem;"></i>
                 </div>
 
                 <div class="zivotinje-animacija-kontejner">
                     <div class="zaba-lovac-kontejner zaba-izron-1">
                         <i class="fa-solid fa-bug musica"></i>
+                        <i class="fa-solid fa-bug musica-2"></i>
                         <div class="jezik"></div>
                         <i class="fa-solid fa-frog zivotinja" style="position:relative; bottom:0;"></i>
                     </div>
                     <div class="zaba-lovac-kontejner zaba-izron-2">
                         <i class="fa-solid fa-bug musica"></i>
+                        <i class="fa-solid fa-bug musica-2"></i>
                         <div class="jezik"></div>
                         <i class="fa-solid fa-frog zivotinja" style="position:relative; bottom:0;"></i>
                     </div>
                     <div class="zaba-lovac-kontejner zaba-izron-3">
                         <i class="fa-solid fa-bug musica"></i>
+                        <i class="fa-solid fa-bug musica-2"></i>
                         <div class="jezik"></div>
                         <i class="fa-solid fa-frog zivotinja" style="position:relative; bottom:0;"></i>
                     </div>
@@ -883,7 +928,7 @@
         function osvjeziVrijeme() {
             const sada = new Date();
             let formatiranDatum = sada.toLocaleDateString('hr-HR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            formatiranDatum = formatiranDatum.charAt(0).toUpperCase() + formatiranDatum.slice(1);
+            formatiranDatum = formatiranDatum.toUpperCase();
             document.getElementById("datum-godina").innerHTML = `<i class="fa-solid fa-calendar-day" style="color: var(--smaragdna);"></i> ${formatiranDatum}`;
             document.getElementById("sat").innerHTML = `<i class="fa-regular fa-clock"></i> ${String(sada.getHours()).padStart(2, '0')}:${String(sada.getMinutes()).padStart(2, '0')}`;
             document.getElementById("godina-footer").innerText = sada.getFullYear();
@@ -929,9 +974,9 @@
             'akcije': { naslov: '<i class="fa-solid fa-hand-holding-heart"></i> Eko Akcije', tekst: '<p>Čišćenje obale i dna.</p>', slike: ['https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1200&q=80'] },
             // Nove sekcije
             'uclani-se': {
-                naslov: '<i class="fa-solid fa-user-plus"></i> Učlani se u Udrugu',
-                tekst: '<p>Postani čuvar Mrežnice! Kao član udruge sudjeluješ u eko akcijama, dobivaš popuste na dozvole za ribolov i besplatan upad na sva ljetna događanja.</p><p>Godišnja članarina iznosi 20 EUR. Ispuni formu u kontakt sekciji s naznakom "Članstvo" i javit ćemo ti se s detaljima.</p>',
-                slike: ['https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1200&q=80']
+                naslov: '<i class="fa-solid fa-user-plus"></i> Prijava i Registracija',
+                tekst: '<p>Postani čuvar Mrežnice! Prijavi se u sustav ili izradi novi korisnički račun kako bi pristupio ekskluzivnim sadržajima udruge.</p><form class="kontakt-forma" style="margin-top:25px; background: rgba(0,0,0,0.4); padding:25px; border-radius:15px; border: 1px solid rgba(0,223,130,0.2);" onsubmit="event.preventDefault(); const btn = this.querySelector(\'.btn-submit\'); const oldTxt = btn.innerHTML; btn.innerHTML = \'<i class=\\\'fa-solid fa-check\\\'></i> Uspješno prijavljeno!\'; setTimeout(() => { btn.innerHTML = oldTxt; this.reset(); }, 3000);"><input type="text" placeholder="Korisničko ime ili Email" required style="width:100%; margin-bottom:15px; padding:15px; border-radius:10px; background:rgba(0,0,0,0.6); color:white; border:1px solid rgba(255,255,255,0.1);"><input type="password" placeholder="Lozinka" required style="width:100%; margin-bottom:20px; padding:15px; border-radius:10px; background:rgba(0,0,0,0.6); color:white; border:1px solid rgba(255,255,255,0.1);"><button type="submit" class="btn-submit" style="width:100%;"><i class="fa-solid fa-right-to-bracket"></i> Prijavi se</button><p style="margin-top:20px; font-size:0.95rem; text-align:center; color:var(--siva);">Nemaš račun? <a href="#" style="color:var(--smaragdna); font-weight:bold; text-decoration:none;">Registriraj se ovdje</a></p></form>',
+                slike: ['https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80']
             },
             'o-rijeci': {
                 naslov: '<i class="fa-solid fa-book-open"></i> Povijest i Autentičnost',
@@ -1118,5 +1163,5 @@
         });
 
     </script>
-</body>
+</body> 
 </html>
