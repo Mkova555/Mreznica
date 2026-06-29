@@ -521,7 +521,7 @@
             section { padding: 50px 15px; } 
             h2 { font-size: 2.2rem; margin-bottom: 25px; word-wrap: break-word; overflow-wrap: break-word; } 
             
-            .kategorije-grid { grid-template-columns: 1fr; }
+            .kat-overlay-naslov { font-size: 2.2rem; } /* Puno manji naslov na mobitelima */
 
             .hero-sadrzaj { padding: 0 15px; }
             .hero-sadrzaj h1 { font-size: 2.4rem; word-break: break-word; hyphens: auto; }
@@ -611,11 +611,11 @@
                 </div>
                 <div class="status-stavka">
                     <span class="status-oznaka">Prognoza (3 dana)</span>
-                    <span class="status-vrijednost prognoza-dani">
-                        <span class="danas">Danas ☀️ 28°C</span>
-                        <span class="sivi-tekst">Sutra ⛅ 26°C</span>
-                        <span class="sivi-tekst">Prekosutra ☀️ 29°C</span>
-                    </span>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 1.1rem; line-height: 1.2; text-align: center; font-weight: bold; align-items: center;">
+                        <span style="font-size: 1.4rem; color: var(--smaragdna);">Danas ☀️ 28°C</span>
+                        <span style="color:var(--siva);">Sutra ⛅ 26°C</span>
+                        <span style="color:var(--siva);">Prekosutra ☀️ 29°C</span>
+                    </div>
                 </div>
                 <div class="status-stavka">
                     <span class="status-oznaka">Mrežnica FM</span>
@@ -874,7 +874,42 @@
         </a>
     </div>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase - Postavke baze podataka za korisnike
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        
+        let db, auth;
+        let platformUserId = null;
+        let ucitanoFirebase = false;
+
+        if (firebaseConfig) {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            
+            async function initAuth() {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined') {
+                        const userCredential = await signInWithCustomToken(auth, __initial_auth_token);
+                        platformUserId = userCredential.user.uid;
+                    } else {
+                        const userCredential = await signInAnonymously(auth);
+                        platformUserId = userCredential.user.uid;
+                    }
+                    ucitanoFirebase = true;
+                    if(document.getElementById('auth-mount')) window.renderAuthUI();
+                } catch (error) {
+                    console.error("Auth error:", error);
+                }
+            }
+            initAuth();
+        }
+
         const hamburger = document.getElementById("hamburger");
         const navMenu = document.getElementById("nav-menu");
         const body = document.querySelector("body");
@@ -972,10 +1007,10 @@
             'ribolov': { naslov: '<i class="fa-solid fa-fish"></i> Ribolovci', tekst: '<p>Bogata štukom, klenom i pastrvom uz C&R režim.</p>', slike: ['https://images.unsplash.com/photo-1508182314998-3bd49473002f?auto=format&fit=crop&w=1200&q=80'] },
             'dogadanja': { naslov: '<i class="fa-solid fa-calendar-days"></i> Događanja', tekst: '<p>Kino pod zvijezdama i koncerti.</p>', slike: ['https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1200&q=80'] },
             'akcije': { naslov: '<i class="fa-solid fa-hand-holding-heart"></i> Eko Akcije', tekst: '<p>Čišćenje obale i dna.</p>', slike: ['https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1200&q=80'] },
-            // Nove sekcije
+            // Nove sekcije (Logika baze preuzima renderiranje)
             'uclani-se': {
-                naslov: '<i class="fa-solid fa-user-plus"></i> Prijava i Registracija',
-                tekst: '<p>Postani čuvar Mrežnice! Prijavi se u sustav ili izradi novi korisnički račun kako bi pristupio ekskluzivnim sadržajima udruge.</p><form class="kontakt-forma" style="margin-top:25px; background: rgba(0,0,0,0.4); padding:25px; border-radius:15px; border: 1px solid rgba(0,223,130,0.2);" onsubmit="event.preventDefault(); const btn = this.querySelector(\'.btn-submit\'); const oldTxt = btn.innerHTML; btn.innerHTML = \'<i class=\\\'fa-solid fa-check\\\'></i> Uspješno prijavljeno!\'; setTimeout(() => { btn.innerHTML = oldTxt; this.reset(); }, 3000);"><input type="text" placeholder="Korisničko ime ili Email" required style="width:100%; margin-bottom:15px; padding:15px; border-radius:10px; background:rgba(0,0,0,0.6); color:white; border:1px solid rgba(255,255,255,0.1);"><input type="password" placeholder="Lozinka" required style="width:100%; margin-bottom:20px; padding:15px; border-radius:10px; background:rgba(0,0,0,0.6); color:white; border:1px solid rgba(255,255,255,0.1);"><button type="submit" class="btn-submit" style="width:100%;"><i class="fa-solid fa-right-to-bracket"></i> Prijavi se</button><p style="margin-top:20px; font-size:0.95rem; text-align:center; color:var(--siva);">Nemaš račun? <a href="#" style="color:var(--smaragdna); font-weight:bold; text-decoration:none;">Registriraj se ovdje</a></p></form>',
+                naslov: '<i class="fa-solid fa-user-plus"></i> Prijavi se ili Registriraj se',
+                tekst: '<p style="font-size: 0.95rem; font-weight: bold; color: var(--siva); margin-bottom: 20px;">Uvjeti korištenja, odgovornosti i zaštita osobnih podataka!</p><div id="auth-mount" style="min-height:200px;">Učitavanje sustava...</div>',
                 slike: ['https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80']
             },
             'o-rijeci': {
@@ -1008,7 +1043,178 @@
             
             // Ako je menu otvoren (na mobitelu), zatvori ga
             hamburger.classList.remove("active"); navMenu.classList.remove("active");
+
+            // Okidač za bazu podataka
+            if (katId === 'uclani-se') {
+                window.renderAuthUI();
+            }
         }
+
+        // ====== FIREBASE LOGIKA ZA PRIJAVU I REGISTRACIJU ======
+        window.trenutniKorisnik = null;
+        let isLoginMode = true;
+
+        window.renderAuthUI = function() {
+            const mount = document.getElementById('auth-mount');
+            if(!mount) return;
+
+            if(!ucitanoFirebase) {
+                mount.innerHTML = '<p style="color:var(--zuta); text-align:center; padding: 20px;"><i class="fa-solid fa-spinner fa-spin"></i> Povezivanje sa serverom, molimo pričekajte...</p>';
+                return;
+            }
+
+            if(window.trenutniKorisnik) {
+                // Prikaz kada je korisnik logiran
+                let adminPanel = '';
+                // ADMIN PRISTUP - Ovdje upisuješ "admin@mreznica.hr" za praćenje ostalih
+                if(window.trenutniKorisnik.email === 'admin@mreznica.hr') {
+                    adminPanel = `
+                    <div style="margin-top:25px; background:rgba(0,223,130,0.1); padding:20px; border-radius:12px; border:1px solid var(--smaragdna); text-align:left;">
+                        <h4 style="color:var(--smaragdna); margin-top:0; margin-bottom:15px; font-size:1.2rem;"><i class="fa-solid fa-users-gear"></i> Admin Panel - Praćenje Korisnika</h4>
+                        <div id="admin-korisnici-lista" style="font-size:0.95rem; color:var(--bijela); max-height:250px; overflow-y:auto; padding-right:10px;">
+                            <i class="fa-solid fa-spinner fa-spin"></i> Učitavanje podataka iz baze...
+                        </div>
+                    </div>`;
+                    fetchKorisnike();
+                }
+
+                mount.innerHTML = `
+                    <div style="background: rgba(0,0,0,0.4); padding:30px; border-radius:15px; border: 1px solid rgba(0,223,130,0.3); text-align:center;">
+                        <i class="fa-solid fa-circle-check" style="font-size:3rem; color:var(--smaragdna); margin-bottom:15px;"></i>
+                        <h3 style="color:var(--bijela); margin-top:0; font-size:1.8rem;">Bok, ${window.trenutniKorisnik.ime}!</h3>
+                        <p style="color:var(--siva); font-size:1.1rem;">Uspješno ste prijavljeni kao: <strong>${window.trenutniKorisnik.email}</strong></p>
+                        ${adminPanel}
+                        <button onclick="odjava()" class="btn-submit" style="width:100%; max-width:300px; margin:25px auto 0; background:var(--crvena); color:white; border-radius:30px;"><i class="fa-solid fa-right-from-bracket"></i> Odjavi se</button>
+                    </div>
+                `;
+            } else {
+                // Prikaz ekrana za prijavu/registraciju
+                const formTitle = isLoginMode ? 'Prijava u sustav' : 'Novi račun';
+                const submitText = isLoginMode ? 'Prijavi se' : 'Registriraj se';
+                const switchText = isLoginMode 
+                    ? 'Nemaš korisnički račun? <a href="#" onclick="toggleAuthMode(false); return false;" style="color:var(--smaragdna); font-weight:bold; text-decoration:underline;">Registriraj se ovdje</a>' 
+                    : 'Imaš korisnički račun? <a href="#" onclick="toggleAuthMode(true); return false;" style="color:var(--smaragdna); font-weight:bold; text-decoration:underline;">Prijavi se ovdje</a>';
+                
+                const imeInput = !isLoginMode ? `<input type="text" id="auth-ime" placeholder="Tvoje Ime i Prezime" required style="width:100%; margin-bottom:15px; padding:15px; border-radius:10px; background:rgba(0,0,0,0.6); color:white; border:1px solid rgba(255,255,255,0.1); font-family:inherit;">` : '';
+
+                mount.innerHTML = `
+                    <form id="glavna-auth-forma" style="background: rgba(0,0,0,0.4); padding:30px 25px; border-radius:15px; border: 1px solid rgba(0,223,130,0.2); max-width:450px; margin:0 auto;">
+                        <h3 style="color:var(--smaragdna); margin-top:0; margin-bottom:25px; text-align:center; font-size:1.6rem;">${formTitle}</h3>
+                        
+                        <div id="auth-error" style="background:rgba(255,68,68,0.1); color:var(--crvena); border:1px solid var(--crvena); padding:10px; border-radius:8px; font-size:0.95rem; margin-bottom:20px; display:none; text-align:left;"></div>
+                        
+                        ${imeInput}
+                        <input type="email" id="auth-email" placeholder="Email adresa" required style="width:100%; margin-bottom:15px; padding:15px; border-radius:10px; background:rgba(0,0,0,0.6); color:white; border:1px solid rgba(255,255,255,0.1); font-family:inherit;">
+                        <input type="password" id="auth-pass" placeholder="Lozinka" required style="width:100%; margin-bottom:25px; padding:15px; border-radius:10px; background:rgba(0,0,0,0.6); color:white; border:1px solid rgba(255,255,255,0.1); font-family:inherit;">
+                        
+                        <button type="submit" class="btn-submit" id="auth-btn-submit" style="width:100%; border-radius:30px; font-size:1.1rem;"><i class="fa-solid fa-right-to-bracket"></i> ${submitText}</button>
+                        
+                        <p style="margin-top:25px; font-size:1rem; text-align:center; color:var(--siva);">${switchText}</p>
+                    </form>
+                `;
+                document.getElementById('glavna-auth-forma').addEventListener('submit', handleAuthSubmit);
+            }
+        };
+
+        window.toggleAuthMode = function(toLogin) {
+            isLoginMode = toLogin;
+            window.renderAuthUI();
+        };
+
+        window.odjava = function() {
+            window.trenutniKorisnik = null;
+            window.renderAuthUI();
+        };
+
+        async function handleAuthSubmit(e) {
+            e.preventDefault();
+            if(!platformUserId) return; 
+
+            const email = document.getElementById('auth-email').value.trim();
+            const pass = document.getElementById('auth-pass').value;
+            const errDiv = document.getElementById('auth-error');
+            const btn = document.getElementById('auth-btn-submit');
+            
+            errDiv.style.display = 'none';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Obrađujem...';
+            btn.disabled = true;
+
+            try {
+                const korisniciRef = collection(db, 'artifacts', appId, 'public', 'data', 'korisnici');
+                // Povlačenje svih korisnika iz baze za validaciju
+                const snapshot = await getDocs(korisniciRef);
+                const sviKorisnici = [];
+                snapshot.forEach(doc => sviKorisnici.push({ id: doc.id, ...doc.data() }));
+
+                if (isLoginMode) {
+                    // Logika Prijave
+                    const korisnik = sviKorisnici.find(k => k.email.toLowerCase() === email.toLowerCase() && k.pass === pass);
+                    if (korisnik) {
+                        window.trenutniKorisnik = korisnik;
+                        window.renderAuthUI();
+                    } else {
+                        errDiv.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Pogrešan email ili lozinka!";
+                        errDiv.style.display = 'block';
+                    }
+                } else {
+                    // Logika Registracije
+                    const postoji = sviKorisnici.find(k => k.email.toLowerCase() === email.toLowerCase());
+                    if (postoji) {
+                        errDiv.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Korisnik s ovim emailom već postoji!";
+                        errDiv.style.display = 'block';
+                    } else {
+                        const ime = document.getElementById('auth-ime').value.trim();
+                        const noviKorisnik = { ime, email, pass, datum: new Date().toISOString() };
+                        await addDoc(korisniciRef, noviKorisnik); // Zapisivanje novog korisnika
+                        window.trenutniKorisnik = noviKorisnik;
+                        window.renderAuthUI();
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+                errDiv.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Greška u sustavu. Pokušajte ponovno.";
+                errDiv.style.display = 'block';
+            } finally {
+                if(!window.trenutniKorisnik) { 
+                    btn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> ${isLoginMode ? 'Prijavi se' : 'Registriraj se'}`;
+                    btn.disabled = false;
+                }
+            }
+        }
+
+        async function fetchKorisnike() {
+            if(!platformUserId) return;
+            const listaDiv = document.getElementById('admin-korisnici-lista');
+            try {
+                const korisniciRef = collection(db, 'artifacts', appId, 'public', 'data', 'korisnici');
+                const snapshot = await getDocs(korisniciRef);
+                
+                const sviKorisnici = [];
+                snapshot.forEach(doc => sviKorisnici.push(doc.data()));
+                
+                // Poredak od najnovijeg prema najstarijem
+                sviKorisnici.sort((a, b) => new Date(b.datum) - new Date(a.datum));
+
+                let html = '<ul style="list-style:none; padding:0; margin:0;">';
+                sviKorisnici.forEach(k => {
+                    const datumObj = new Date(k.datum);
+                    const datum = datumObj.toLocaleDateString('hr-HR') + ' ' + datumObj.toLocaleTimeString('hr-HR', {hour: '2-digit', minute:'2-digit'});
+                    html += `<li style="border-bottom:1px solid rgba(255,255,255,0.1); padding:12px 0;">
+                        <div style="color:var(--bijela); font-weight:bold; font-size:1.05rem;"><i class="fa-regular fa-user"></i> ${k.ime}</div>
+                        <div style="color:var(--zuta); font-size:0.95rem; margin-top:5px;"><i class="fa-regular fa-envelope"></i> ${k.email}</div>
+                        <div style="color:var(--siva); font-size:0.85rem; margin-top:5px;"><i class="fa-regular fa-clock"></i> Reg: ${datum}</div>
+                    </li>`;
+                });
+                html += '</ul>';
+                
+                if(sviKorisnici.length === 0) html = "Nema registriranih korisnika.";
+                listaDiv.innerHTML = html;
+            } catch (err) {
+                console.error(err);
+                listaDiv.innerHTML = "<span style='color:var(--crvena);'>Greška pri učitavanju korisnika iz baze.</span>";
+            }
+        }
+        // =======================================================
 
         katKartice.forEach(kartica => {
             kartica.addEventListener('click', () => otvoriKategoriju(kartica.getAttribute('data-kat-id')));
@@ -1163,5 +1369,5 @@
         });
 
     </script>
-</body> 
-</html>
+</body>
+    </html>
