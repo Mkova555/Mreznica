@@ -16,11 +16,11 @@
             --tamno-zelena: rgba(16, 24, 19, 0.75); 
             --smaragdna: #00df82; 
             --smaragdna-glow: rgba(0, 223, 130, 0.4);
-            --bijela: #FDE047; /* Pretvorili smo glavnu bijelu boju teksta u žutu */
+            --bijela: #FDE047; 
             --siva: #a3b3aa;
             --tamno-siva: #1e2924;
             --crvena: #ff4444;
-            --zuta: #FDE047; /* Lijepa, mekana žuta boja za linkove */
+            --zuta: #FDE047; 
         }
 
         html, body {
@@ -70,7 +70,6 @@
         }
         .logo i.fa-water { display: inline-block; animation: zivi-valovi 5s ease-in-out infinite; }
         
-        /* Nove žabice u zaglavlju */
         .header-zabice { display: flex; gap: 18px; margin-left: 15px; align-items: flex-end; height: 35px; }
         .header-zaba { color: var(--smaragdna); font-size: 20px; }
         .z1 { animation: skok-zabe 3s infinite 0.2s; }
@@ -86,20 +85,9 @@
         }
 
         .nav-desno { display: flex; align-items: center; gap: 25px; }
-        
-        /* Language switcher - UREĐENO (Pill dizajn) */
-        .jezik-switch { 
-            display: flex; flex-direction: row; align-items: center; gap: 5px; 
-            background: rgba(0,0,0,0.3); border: 1px solid rgba(0, 223, 130, 0.3); 
-            border-radius: 20px; padding: 4px; color: var(--siva); font-size: 0.85rem; font-weight: bold; 
-        }
-        .jezik-switch span { cursor: pointer; transition: 0.3s; padding: 6px 12px; border-radius: 15px; line-height: 1; }
-        .jezik-switch span:hover { color: var(--bijela); }
-        .jezik-switch span.aktivan { background: var(--smaragdna); color: var(--crna); text-shadow: none; box-shadow: 0 0 10px rgba(0,223,130,0.4); }
 
         .nav-menu { display: flex; list-style: none; gap: 8px; align-items: center; margin: 0; padding: 0; }
         
-        /* Novi dizajn linkova navigacije */
         .nav-link { 
             font-family: 'Montserrat', sans-serif;
             text-decoration: none; color: var(--zuta); font-weight: 700; text-transform: uppercase; 
@@ -116,7 +104,6 @@
         .hamburger { display: none; cursor: pointer; z-index: 2000; }
         .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: 0.3s; background-color: var(--smaragdna); }
         .mobilni-samo { display: none; }
-        .jezik-switch-mobilni { display: none; }
 
         .hero-sekcija {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
@@ -195,45 +182,22 @@
             100% { opacity: 0; transform: translateY(40px); }
         }
 
-        /* Jezik žabe */
         .jezik {
-            position: absolute;
-            bottom: 30px; /* Početak malo iznad žabe */
-            width: 4px;
-            height: 0;
-            background-color: #ff6b6b; /* Crvenkasta boja jezika */
-            border-radius: 4px;
-            transform-origin: bottom center;
-            z-index: 10;
+            position: absolute; bottom: 30px; width: 4px; height: 0; background-color: #ff6b6b;
+            border-radius: 4px; transform-origin: bottom center; z-index: 10;
         }
 
-        /* Mušica */
-        .musica {
-            position: absolute;
-            color: #d1d8d4;
-            font-size: 8px;
-            z-index: 11;
-            opacity: 0;
-        }
+        .musica { position: absolute; color: #d1d8d4; font-size: 8px; z-index: 11; opacity: 0; }
+        .musica-2 { position: absolute; color: #a3b3aa; font-size: 7px; z-index: 11; opacity: 0; }
 
-        /* Dodatne mušice */
-        .musica-2 {
-            position: absolute;
-            color: #a3b3aa;
-            font-size: 7px;
-            z-index: 11;
-            opacity: 0;
-        }
-
-        /* Animacije za prvu žabu */
         .zaba-izron-1 .jezik { animation: izbaci-jezik-1 6s infinite 0.5s; left: 50%; transform: translateX(-50%) rotate(15deg); }
         .zaba-izron-1 .musica { animation: musica-leti-1 6s infinite 0.5s; top: -60px; right: -25px; font-size: 10px; }
         .zaba-izron-1 .musica-2 { animation: musica-leti-1-dodatna 6s infinite 0.7s; top: -40px; right: -40px; font-size: 9px; }
 
         @keyframes izbaci-jezik-1 {
             0%, 40% { height: 0; }
-            45% { height: 75px; } /* Jezik se izdužuje do mušice */
-            50%, 100% { height: 0; } /* Jezik se brzo vraća */
+            45% { height: 75px; } 
+            50%, 100% { height: 0; } 
         }
         
         @keyframes musica-leti-1 {
@@ -241,8 +205,8 @@
             20% { opacity: 1; transform: translate(5px, 0px); }
             30% { opacity: 1; transform: translate(0px, 5px); }
             40% { opacity: 1; transform: translate(-5px, 0px); }
-            44% { opacity: 1; transform: translate(-10px, 5px); } /* Mušica je na poziciji za jelo */
-            45%, 100% { opacity: 0; } /* Mušica je pojedena */
+            44% { opacity: 1; transform: translate(-10px, 5px); } 
+            45%, 100% { opacity: 0; } 
         }
 
         @keyframes musica-leti-1-dodatna {
@@ -253,7 +217,6 @@
             45%, 100% { opacity: 0; }
         }
 
-        /* Animacije za drugu žabu (srednja, manja) */
         .zaba-izron-2 .jezik { animation: izbaci-jezik-2 7.5s infinite 2s; left: 50%; transform: translateX(-50%) rotate(-20deg); background-color: #e74c3c;}
         .zaba-izron-2 .musica { animation: musica-leti-2 7.5s infinite 2s; top: -55px; left: -30px; font-size: 9px; }
         .zaba-izron-2 .musica-2 { animation: musica-leti-2-dodatna 7.5s infinite 2.3s; top: -70px; left: 15px; font-size: 8px;}
@@ -280,7 +243,6 @@
             60%, 100% { opacity: 0; }
         }
 
-        /* Animacije za treću žabu (bijela) */
         .zaba-izron-3 .jezik { animation: izbaci-jezik-3 6.5s infinite 3.5s; left: 50%; transform: translateX(-50%) rotate(5deg); }
         .zaba-izron-3 .musica { animation: musica-leti-3 6.5s infinite 3.5s; top: -70px; right: -5px; color: #a3b3aa; font-size: 10px;}
         .zaba-izron-3 .musica-2 { animation: musica-leti-3-dodatna 6.5s infinite 3.8s; top: -45px; right: 25px; font-size: 9px; }
@@ -448,9 +410,9 @@
         .prognoza-dani .danas { font-size: 1.5rem; color: var(--zuta); }
         .prognoza-dani .sivi-tekst { color: #d1d8d4; font-size: 1.15rem; font-weight: normal; }
 
-        /* Plutajući gumbi (WhatsApp & BackToTop) */
+        /* Plutajući gumbi (WhatsApp, PWA, Back to top i JEZICI) */
         .plutajuci-gumbi {
-            position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 30px; z-index: 3500;
+            position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 20px; z-index: 3500; align-items: flex-end;
         }
         .plutajuci-gumb {
             width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
@@ -459,18 +421,75 @@
         }
         .plutajuci-gumb.wa { background-color: #25D366; }
         .plutajuci-gumb.wa:hover { background-color: #128C7E; transform: scale(1.1); }
+        
+        /* Gumb za instalaciju app (PWA) */
+        .plutajuci-gumb.pwa { background-color: var(--zuta); color: var(--crna); display: none; }
+        .plutajuci-gumb.pwa:hover { background-color: #fbc531; transform: scale(1.1); }
+
         .tooltip-tekst {
             position: absolute; right: 70px; background: rgba(0,0,0,0.85); padding: 8px 12px; border-radius: 8px;
             font-size: 0.9rem; font-weight: bold; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.3s;
             border: 1px solid var(--smaragdna); color: var(--zuta);
         }
-        .plutajuci-gumb.wa:hover .tooltip-tekst { opacity: 1; right: 65px; }
+        .plutajuci-gumb:hover .tooltip-tekst { opacity: 1; right: 65px; }
         
         .plutajuci-gumb.btt { background-color: var(--smaragdna); color: var(--crna); opacity: 0; pointer-events: none; transform: translateY(20px); }
         .plutajuci-gumb.btt.vidljivo { opacity: 1; pointer-events: auto; transform: translateY(0); }
         .plutajuci-gumb.btt:hover { background-color: var(--bijela); transform: translateY(-5px); }
 
-        /* OVO JE ISPRAVLJENO STILIZIRANJE ZA MOBITEL ZA STATUS TRAKU */
+        /* Plutajući odabir jezika na desnoj strani, iznad WhatsAppa, sklopiv */
+        .jezik-kontejner {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .trenutni-jezik-gumb {
+            width: 55px; height: 55px; border-radius: 50%;
+            background: rgba(0,0,0,0.8); border: 2px solid var(--smaragdna);
+            color: var(--smaragdna); font-weight: bold; font-size: 1.1rem;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .trenutni-jezik-gumb:hover, .trenutni-jezik-gumb.otvoreno {
+            background: var(--smaragdna); color: var(--crna);
+        }
+
+        .jezik-opcije {
+            position: absolute;
+            bottom: 70px; /* Iznad glavnog gumba */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 223, 130, 0.3);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: bottom center;
+        }
+        .jezik-opcije.prikazi {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        .jezik-opcije span {
+            width: 45px; height: 45px; display: flex; justify-content: center; align-items: center;
+            border-radius: 50%; color: var(--siva); font-weight: bold; cursor: pointer; transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        .jezik-opcije span:hover { color: var(--bijela); background: rgba(255,255,255,0.1); }
+        .jezik-opcije span.aktivan { background: var(--smaragdna); color: var(--crna); box-shadow: 0 0 15px rgba(0,223,130,0.4); }
+
         @media (max-width: 1024px) {
             .hamburger { display: block; }
             .nav-menu { position: fixed; top: 0; left: -100vw; width: 100vw; height: 100vh; background-color: rgba(7, 11, 9, 0.99); backdrop-filter: blur(15px); flex-direction: column; justify-content: center; gap: 20px; transition: 0.4s ease-in-out; }
@@ -479,38 +498,12 @@
             .hamburger.active .bar:nth-child(2) { opacity: 0; } .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); } .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
             
             .mobilni-samo { display: flex; justify-content: center; margin-bottom: 20px; width: 100%; border-bottom: 1px solid rgba(0,223,130,0.3); padding-bottom: 20px; }
-            .jezik-switch { display: none; }
             
-            .jezik-switch-mobilni { 
-                display: inline-flex; justify-content: center; align-items: center; gap: 5px; 
-                background: rgba(0,0,0,0.4); border: 1px solid rgba(0, 223, 130, 0.3); 
-                padding: 5px; border-radius: 25px; margin: 0 auto 25px auto; 
-            }
-            .jezik-switch-mobilni span { color: var(--siva); font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.3s; padding: 8px 16px; border-radius: 20px; }
-            .jezik-switch-mobilni span:hover { color: var(--bijela); }
-            .jezik-switch-mobilni span.aktivan { background: var(--smaragdna); color: var(--crna); text-shadow: none; box-shadow: 0 0 10px rgba(0,223,130,0.4); }
-            
-            /* POPRAVAK STATUS TRAKE: Elegantno centriranje i redanje jedno ispod drugog */
-            .status-traka { 
-                flex-direction: column; 
-                padding: 15px 20px; 
-                gap: 0; 
-            } 
-            .status-stavka { 
-                border-right: none; 
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Mekana, lagana linija */
-                padding: 20px 0; 
-                align-items: center; 
-                text-align: center; 
-                width: 100%;
-            } 
+            .status-traka { flex-direction: column; padding: 15px 20px; gap: 0; } 
+            .status-stavka { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 20px 0; align-items: center; text-align: center; width: 100%; } 
             .status-stavka:first-child { padding-top: 5px; }
             .status-stavka:last-child { border-bottom: none; padding-bottom: 5px; }
-            
-            /* Osiguravamo da ikona i vrijednost stoje uredno na sredini u svakom redu */
             .status-vrijednost { justify-content: center; text-align: center; }
-            
-            /* Skraćuje ogroman gumb na mobitelu i centrira ga */
             .radio-btn { max-width: 250px; margin: 0 auto; }
             
             .kontakt-grid { grid-template-columns: 1fr; }
@@ -521,7 +514,7 @@
             section { padding: 50px 15px; } 
             h2 { font-size: 2.2rem; margin-bottom: 25px; word-wrap: break-word; overflow-wrap: break-word; } 
             
-            .kat-overlay-naslov { font-size: 2.2rem; } /* Puno manji naslov na mobitelima */
+            .kat-overlay-naslov { font-size: 2.2rem; } 
 
             .hero-sadrzaj { padding: 0 15px; }
             .hero-sadrzaj h1 { font-size: 2.4rem; word-break: break-word; hyphens: auto; }
@@ -533,7 +526,6 @@
             
             .kategorije-grid { grid-template-columns: 1fr; }
             
-            .jezik-switch { display: none; } 
             .logo { font-size: 22px; }
             
             .header-zabice { gap: 8px; margin-left: 10px; } 
@@ -543,6 +535,10 @@
             
             .plutajuci-gumbi { bottom: 15px; right: 15px; gap: 15px; }
             .plutajuci-gumb { width: 45px; height: 45px; font-size: 1.5rem; }
+            
+            .trenutni-jezik-gumb { width: 45px; height: 45px; font-size: 0.95rem; }
+            .jezik-opcije { bottom: 60px; padding: 8px; gap: 8px; }
+            .jezik-opcije span { width: 38px; height: 38px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -560,34 +556,24 @@
             </a>
             
             <div class="nav-desno">
-                <div class="jezik-switch">
-                    <span class="aktivan">HR</span>
-                    <span>EN</span>
-                    <span>FR</span>
-                </div>
                 <div class="hamburger" id="hamburger">
                     <span class="bar"></span><span class="bar"></span><span class="bar"></span>
                 </div>
                 <ul class="nav-menu" id="nav-menu">
-                    <!-- Logo samo za mobilni menu iznad linkova -->
+                    <!-- Logo samo za mobil menu iznad linkova -->
                     <li class="mobilni-samo">
                         <a href="#" class="logo" style="text-shadow: none;">
                             <i class="fa-solid fa-water"></i> MREŽNICA
                             <i class="fa-solid fa-frog" style="color:var(--smaragdna); font-size: 24px; margin-left:10px; animation: skok-zabe 2s infinite;"></i>
                         </a>
                     </li>
-                    <li class="jezik-switch-mobilni">
-                        <span class="aktivan">HR</span>
-                        <span>EN</span>
-                        <span>FR</span>
-                    </li>
                     <li><a href="#pocetna" class="nav-link aktivno">Početna</a></li>
                     <li><a href="#o-rijeci" class="nav-link">O rijeci</a></li>
                     <li><a href="#kategorije" class="nav-link">Sadržaj</a></li>
                     <li><a href="#galerija" class="nav-link">Album</a></li>
                     <li><a href="#kontakt" class="nav-link">Kontakt</a></li>
-                    <!-- Vraćen link Učlani se -->
-                    <li><a href="#" class="nav-link" onclick="otvoriKategoriju('uclani-se'); return false;"><i class="fa-solid fa-user-plus"></i> Učlani se</a></li>
+                    <!-- Maknuta ikona i preimenovano po uputama -->
+                    <li><a href="#" class="nav-link" onclick="otvoriKategoriju('uclani-se'); return false;">Registracija</a></li>
                 </ul>
             </div>
         </nav>
@@ -596,7 +582,6 @@
     <div id="glavni-sadrzaj">
         
         <section id="pocetna" class="hero-sekcija">
-            <!-- Canvas obrisan kako bismo ubrzali stranicu -->
             <div class="hero-sadrzaj">
                 <h1>Smaragdna <span>Ljepotica</span></h1>
                 <p>Zeleno srce Hrvatske. Uroni u netaknutu prirodu, osjeti apsolutni mir i poštuj našu rijeku.</p>
@@ -608,7 +593,8 @@
                     <span class="status-vrijednost status-smaragd" id="sat"><i class="fa-regular fa-clock"></i> 00:00</span>
                 </div>
                 <div class="status-stavka">
-                    <span class="status-oznaka">Temperatura & Kvaliteta</span>
+                    <!-- Izmijenjen tekst s dodatkom "VODE" -->
+                    <span class="status-oznaka">Temperatura & Kvaliteta VODE</span>
                     <span class="status-vrijednost"><i class="fa-solid fa-temperature-half" style="color: var(--smaragdna);"></i> <span style="color: var(--zuta);">22°C</span> <span style="color: var(--siva); font-weight: normal; margin: 0 5px;">|</span> <span class="status-smaragd">Izvrsna</span></span>
                 </div>
                 <div class="status-stavka">
@@ -780,7 +766,6 @@
             
             <div class="kontakt-grid">
                 <div>
-                    <!-- Forma je zadržala tvoju logiku, jedino sam text alert-a integrirao direktno u gumb zbog tehničkih pravila -->
                     <form class="kontakt-forma" onsubmit="event.preventDefault(); const btn = this.querySelector('.btn-submit'); const oldTxt = btn.innerHTML; btn.innerHTML = '<i class=\'fa-solid fa-check\'></i> Poslano!'; setTimeout(() => { btn.innerHTML = oldTxt; this.reset(); }, 3000);">
                         <input type="text" placeholder="Vaše Ime i Prezime" required>
                         <input type="email" placeholder="Vaša Email Adresa" required>
@@ -823,7 +808,6 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; <span id="godina-footer"></span> Čuvari Mrežnice. Sva prava pridržana.</p>
-                <!-- Zamijenjen tekst brojača samo s ikonom -->
                 <div class="brojac-posjeta" title="Ukupno posjeta">
                     <i class="fa-solid fa-heart-pulse"></i> <span id="broj-posjeta">...</span>
                 </div>
@@ -865,8 +849,22 @@
         </div>
     </div>
 
-    <!-- PLUTAJUĆI GUMBI (WhatsApp i Back to top) -->
+    <!-- PLUTAJUĆI GUMBI DESNO (Jezik, PWA, WhatsApp, Back to top) -->
     <div class="plutajuci-gumbi">
+        <!-- JEZICI (Sklopivi) -->
+        <div class="jezik-kontejner">
+            <div class="jezik-opcije" id="jezik-opcije">
+                <span class="aktivan" data-lang="HR" title="Hrvatski">HR</span>
+                <span data-lang="EN" title="English">EN</span>
+                <span data-lang="FR" title="Français">FR</span>
+            </div>
+            <div class="trenutni-jezik-gumb" id="trenutni-jezik-gumb">HR</div>
+        </div>
+
+        <a href="#" class="plutajuci-gumb pwa" id="pwa-install-btn">
+            <i class="fa-solid fa-download"></i>
+            <span class="tooltip-tekst">Instaliraj App</span>
+        </a>
         <a href="https://wa.me/385991234567" target="_blank" class="plutajuci-gumb wa">
             <i class="fa-brands fa-whatsapp"></i>
             <span class="tooltip-tekst">Pitaj odmah</span>
@@ -881,13 +879,15 @@
         import { getAuth, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Firebase - Postavke baze podataka za korisnike
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
         
         let db, auth;
         let platformUserId = null;
         let ucitanoFirebase = false;
+        
+        // NOVO: Sigurnosni kod / flag za lokalni fallback ako Firebase zapne
+        let firebaseDostupan = false; 
 
         if (firebaseConfig) {
             const app = initializeApp(firebaseConfig);
@@ -903,14 +903,26 @@
                         const userCredential = await signInAnonymously(auth);
                         platformUserId = userCredential.user.uid;
                     }
+                    firebaseDostupan = true; 
                     ucitanoFirebase = true;
                     if(document.getElementById('auth-mount')) window.renderAuthUI();
                 } catch (error) {
                     console.error("Auth error:", error);
+                    firebaseDostupan = false; 
                 }
             }
             initAuth();
         }
+
+        // NOVO: Ako nakon 2.5 sekunde baza još nije učitana, prebacujemo na Browser (Local) bazu
+        setTimeout(() => {
+            if(!ucitanoFirebase) {
+                console.warn("Firebase učitavanje zapelo! Prebacujem na lokalnu bazu.");
+                firebaseDostupan = false;
+                ucitanoFirebase = true;
+                if(document.getElementById('auth-mount')) window.renderAuthUI();
+            }
+        }, 2500);
 
         const hamburger = document.getElementById("hamburger");
         const navMenu = document.getElementById("nav-menu");
@@ -927,7 +939,6 @@
             });
         });
 
-        // Zaglavlje scroll i BackToTop
         const header = document.getElementById("glavno-zaglavlje");
         const bttBtn = document.getElementById("backToTop");
         const sekcije = document.querySelectorAll("section");
@@ -936,15 +947,12 @@
         window.addEventListener("scroll", () => {
             let scrollY = window.scrollY;
             
-            // Header sjena
             if (scrollY > 50) header.classList.add("skrolano");
             else header.classList.remove("skrolano");
             
-            // Back to top gumb
             if (scrollY > 400) bttBtn.classList.add("vidljivo");
             else bttBtn.classList.remove("vidljivo");
 
-            // Aktivni link u navigaciji prema scrollu
             let trenutnaSekcija = "";
             sekcije.forEach(sec => {
                 const secTop = sec.offsetTop;
@@ -961,7 +969,6 @@
             });
         });
 
-        // Vrijeme i brojač posjeta
         function osvjeziVrijeme() {
             const sada = new Date();
             let formatiranDatum = sada.toLocaleDateString('hr-HR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
@@ -980,7 +987,6 @@
 
         const radioBtn = document.getElementById("radio-btn");
         const vizualizator = document.getElementById("radio-vizualizator");
-        // Ažuriran URL za radio
         const audioMreznica = new Audio('https://stream3.dns69it.com:443/;');
         audioMreznica.loop = true;
         let svira = false;
@@ -1000,20 +1006,86 @@
             }
         });
 
+        // AŽURIRANO: Svaka kategorija sada ima 3 ili 4 predivne HD slike!
         const kategorijeBaza = {
-            'slapovi': { naslov: '<i class="fa-solid fa-water"></i> Slapovi', tekst: '<p>Mrežnica je poznata kao "rijeka sa stotinu slapova". Iako ih službeno ima 93 (sedrenih barijera), svaki nudi drugačiji doživljaj.</p>', slike: ['https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1200&q=80', 'https://images.unsplash.com/photo-1546587348-d12660c30c50?auto=format&fit=crop&w=1200&q=80'] },
-            'kupalista': { naslov: '<i class="fa-solid fa-umbrella-beach"></i> Kupališta', tekst: '<p>Od Duge Rese pa sve do gornjeg toka, Mrežnica nudi savršena mjesta za kupanje. Voda ljeti dostiže ugodnih 26°C.</p>', slike: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80'] },
-            'hrana': { naslov: '<i class="fa-solid fa-utensils"></i> Gastro', tekst: '<p>Specijalitet kuće je svježa pastrva sa žara uz rijeku.</p>', slike: ['https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80'] },
-            'smjestaj': { naslov: '<i class="fa-solid fa-campground"></i> Smještaj', tekst: '<p>Probudite se uz žubor. Od glampinga do klasičnih kampova.</p>', slike: ['https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=1200&q=80'] },
-            'ljubimci': { naslov: '<i class="fa-solid fa-dog"></i> Psi', tekst: '<p>Kupališta prijateljska za kućne ljubimce.</p>', slike: ['https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=1200&q=80'] },
-            'ribolov': { naslov: '<i class="fa-solid fa-fish"></i> Ribolovci', tekst: '<p>Bogata štukom, klenom i pastrvom uz C&R režim.</p>', slike: ['https://images.unsplash.com/photo-1508182314998-3bd49473002f?auto=format&fit=crop&w=1200&q=80'] },
-            'dogadanja': { naslov: '<i class="fa-solid fa-calendar-days"></i> Događanja', tekst: '<p>Kino pod zvijezdama i koncerti.</p>', slike: ['https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1200&q=80'] },
-            'akcije': { naslov: '<i class="fa-solid fa-hand-holding-heart"></i> Eko Akcije', tekst: '<p>Čišćenje obale i dna.</p>', slike: ['https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1200&q=80'] },
-            // Nove sekcije (Logika baze preuzima renderiranje)
+            'slapovi': { 
+                naslov: '<i class="fa-solid fa-water"></i> Slapovi', 
+                tekst: '<p>Mrežnica je poznata kao "rijeka sa stotinu slapova". Iako ih službeno ima 93 (sedrenih barijera), svaki nudi drugačiji doživljaj.</p>', 
+                slike: [
+                    'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1200&q=80', 
+                    'https://images.unsplash.com/photo-1546587348-d12660c30c50?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1432405972618-c6c00d0a12e5?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1518182170546-076616fdca44?auto=format&fit=crop&w=1200&q=80'
+                ] 
+            },
+            'kupalista': { 
+                naslov: '<i class="fa-solid fa-umbrella-beach"></i> Kupališta', 
+                tekst: '<p>Od Duge Rese pa sve do gornjeg toka, Mrežnica nudi savršena mjesta za kupanje. Voda ljeti dostiže ugodnih 26°C.</p>', 
+                slike: [
+                    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&w=1200&q=80'
+                ] 
+            },
+            'hrana': { 
+                naslov: '<i class="fa-solid fa-utensils"></i> Gastro', 
+                tekst: '<p>Specijalitet kuće je svježa pastrva sa žara uz rijeku.</p>', 
+                slike: [
+                    'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1414235077428-33898ed2e811?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80'
+                ] 
+            },
+            'smjestaj': { 
+                naslov: '<i class="fa-solid fa-campground"></i> Smještaj', 
+                tekst: '<p>Probudite se uz žubor. Od glampinga do klasičnih kampova.</p>', 
+                slike: [
+                    'https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1200&q=80'
+                ] 
+            },
+            'ljubimci': { 
+                naslov: '<i class="fa-solid fa-dog"></i> Psi', 
+                tekst: '<p>Kupališta prijateljska za kućne ljubimce.</p>', 
+                slike: [
+                    'https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1537151608804-ea6f11cc5d33?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80'
+                ] 
+            },
+            'ribolov': { 
+                naslov: '<i class="fa-solid fa-fish"></i> Ribolovci', 
+                tekst: '<p>Bogata štukom, klenom i pastrvom uz C&R režim.</p>', 
+                slike: [
+                    'https://images.unsplash.com/photo-1508182314998-3bd49473002f?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1543301035-77983693fb57?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1495954484750-af469f2f9be5?auto=format&fit=crop&w=1200&q=80'
+                ] 
+            },
+            'dogadanja': { 
+                naslov: '<i class="fa-solid fa-calendar-days"></i> Događanja', 
+                tekst: '<p>Kino pod zvijezdama i koncerti uz predivnu obalu.</p>', 
+                slike: [
+                    'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1533174000273-e18e8a1f4b8f?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80'
+                ] 
+            },
+            'akcije': { 
+                naslov: '<i class="fa-solid fa-hand-holding-heart"></i> Eko Akcije', 
+                tekst: '<p>Čišćenje obale i dna. Priključite se zaštiti naše Mrežnice.</p>', 
+                slike: [
+                    'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1563514930353-8cece1301c22?auto=format&fit=crop&w=1200&q=80'
+                ] 
+            },
             'uclani-se': {
-                naslov: '<i class="fa-solid fa-user-plus"></i> Prijavi se ili Registriraj se',
+                naslov: 'Prijava / Registracija',
                 tekst: '<p style="font-size: 0.95rem; font-weight: bold; color: var(--siva); margin-bottom: 20px;">Uvjeti korištenja, odgovornosti i zaštita osobnih podataka!</p><div id="auth-mount" style="min-height:200px;">Učitavanje sustava...</div>',
-                slike: ['https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80']
+                slike: ['https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80', 'https://images.unsplash.com/photo-1506015391300-415214d24ea4?auto=format&fit=crop&w=1200&q=80']
             },
             'o-rijeci': {
                 naslov: '<i class="fa-solid fa-book-open"></i> Povijest i Autentičnost',
@@ -1043,16 +1115,14 @@
             overlay.classList.add('aktivno');
             body.style.overflow = "hidden";
             
-            // Ako je menu otvoren (na mobitelu), zatvori ga
             hamburger.classList.remove("active"); navMenu.classList.remove("active");
 
-            // Okidač za bazu podataka
             if (katId === 'uclani-se') {
                 window.renderAuthUI();
             }
         }
 
-        // ====== FIREBASE LOGIKA ZA PRIJAVU I REGISTRACIJU ======
+        // ====== LOGIKA ZA PRIJAVU I REGISTRACIJU SA SIGURNOSNIM FALLBACKOM ======
         window.trenutniKorisnik = null;
         let isLoginMode = true;
 
@@ -1066,9 +1136,7 @@
             }
 
             if(window.trenutniKorisnik) {
-                // Prikaz kada je korisnik logiran
                 let adminPanel = '';
-                // ADMIN PRISTUP - Ovdje upisuješ "admin@mreznica.hr" za praćenje ostalih
                 if(window.trenutniKorisnik.email === 'admin@mreznica.hr') {
                     adminPanel = `
                     <div style="margin-top:25px; background:rgba(0,223,130,0.1); padding:20px; border-radius:12px; border:1px solid var(--smaragdna); text-align:left;">
@@ -1085,12 +1153,12 @@
                         <i class="fa-solid fa-circle-check" style="font-size:3rem; color:var(--smaragdna); margin-bottom:15px;"></i>
                         <h3 style="color:var(--bijela); margin-top:0; font-size:1.8rem;">Bok, ${window.trenutniKorisnik.ime}!</h3>
                         <p style="color:var(--siva); font-size:1.1rem;">Uspješno ste prijavljeni kao: <strong>${window.trenutniKorisnik.email}</strong></p>
+                        ${!firebaseDostupan ? '<p style="color:var(--zuta); font-size:0.9rem;"><i class="fa-solid fa-bolt"></i> Radiš u Offline/Lokalnom modu</p>' : ''}
                         ${adminPanel}
                         <button onclick="odjava()" class="btn-submit" style="width:100%; max-width:300px; margin:25px auto 0; background:var(--crvena); color:white; border-radius:30px;"><i class="fa-solid fa-right-from-bracket"></i> Odjavi se</button>
                     </div>
                 `;
             } else {
-                // Prikaz ekrana za prijavu/registraciju
                 const formTitle = isLoginMode ? 'Prijava u sustav' : 'Novi račun';
                 const submitText = isLoginMode ? 'Prijavi se' : 'Registriraj se';
                 const switchText = isLoginMode 
@@ -1098,11 +1166,12 @@
                     : 'Imaš korisnički račun? <a href="#" onclick="toggleAuthMode(true); return false;" style="color:var(--smaragdna); font-weight:bold; text-decoration:underline;">Prijavi se ovdje</a>';
                 
                 const imeInput = !isLoginMode ? `<input type="text" id="auth-ime" placeholder="Tvoje Ime i Prezime" required style="width:100%; margin-bottom:15px; padding:15px; border-radius:10px; background:rgba(0,0,0,0.6); color:white; border:1px solid rgba(255,255,255,0.1); font-family:inherit;">` : '';
+                const lokalnaBazaUpozorenje = !firebaseDostupan ? '<div style="background:rgba(253,224,71,0.1); color:var(--zuta); border:1px solid var(--zuta); padding:8px; border-radius:8px; font-size:0.85rem; margin-bottom:15px;"><i class="fa-solid fa-bolt"></i> Server trenutno nije dostupan, no proces je prebačen na tvoju brzu lokalnu bazu!</div>' : '';
 
                 mount.innerHTML = `
                     <form id="glavna-auth-forma" style="background: rgba(0,0,0,0.4); padding:30px 25px; border-radius:15px; border: 1px solid rgba(0,223,130,0.2); max-width:450px; margin:0 auto;">
                         <h3 style="color:var(--smaragdna); margin-top:0; margin-bottom:25px; text-align:center; font-size:1.6rem;">${formTitle}</h3>
-                        
+                        ${lokalnaBazaUpozorenje}
                         <div id="auth-error" style="background:rgba(255,68,68,0.1); color:var(--crvena); border:1px solid var(--crvena); padding:10px; border-radius:8px; font-size:0.95rem; margin-bottom:20px; display:none; text-align:left;"></div>
                         
                         ${imeInput}
@@ -1130,8 +1199,6 @@
 
         async function handleAuthSubmit(e) {
             e.preventDefault();
-            if(!platformUserId) return; 
-
             const email = document.getElementById('auth-email').value.trim();
             const pass = document.getElementById('auth-pass').value;
             const errDiv = document.getElementById('auth-error');
@@ -1142,39 +1209,62 @@
             btn.disabled = true;
 
             try {
-                const korisniciRef = collection(db, 'artifacts', appId, 'public', 'data', 'korisnici');
-                // Povlačenje svih korisnika iz baze za validaciju
-                const snapshot = await getDocs(korisniciRef);
-                const sviKorisnici = [];
-                snapshot.forEach(doc => sviKorisnici.push({ id: doc.id, ...doc.data() }));
+                // Ako imamo Firebase dostupan, koristimo ga
+                if (firebaseDostupan && platformUserId) {
+                    const korisniciRef = collection(db, 'artifacts', appId, 'public', 'data', 'korisnici');
+                    const snapshot = await getDocs(korisniciRef);
+                    const sviKorisnici = [];
+                    snapshot.forEach(doc => sviKorisnici.push({ id: doc.id, ...doc.data() }));
 
-                if (isLoginMode) {
-                    // Logika Prijave
-                    const korisnik = sviKorisnici.find(k => k.email.toLowerCase() === email.toLowerCase() && k.pass === pass);
-                    if (korisnik) {
-                        window.trenutniKorisnik = korisnik;
-                        window.renderAuthUI();
+                    if (isLoginMode) {
+                        const korisnik = sviKorisnici.find(k => k.email.toLowerCase() === email.toLowerCase() && k.pass === pass);
+                        if (korisnik) {
+                            window.trenutniKorisnik = korisnik;
+                            window.renderAuthUI();
+                        } else {
+                            throw new Error("Pogrešan email ili lozinka!");
+                        }
                     } else {
-                        errDiv.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Pogrešan email ili lozinka!";
-                        errDiv.style.display = 'block';
+                        const postoji = sviKorisnici.find(k => k.email.toLowerCase() === email.toLowerCase());
+                        if (postoji) {
+                            throw new Error("Korisnik s ovim emailom već postoji!");
+                        } else {
+                            const ime = document.getElementById('auth-ime').value.trim();
+                            const noviKorisnik = { ime, email, pass, datum: new Date().toISOString() };
+                            await addDoc(korisniciRef, noviKorisnik); 
+                            window.trenutniKorisnik = noviKorisnik;
+                            window.renderAuthUI();
+                        }
                     }
                 } else {
-                    // Logika Registracije
-                    const postoji = sviKorisnici.find(k => k.email.toLowerCase() === email.toLowerCase());
-                    if (postoji) {
-                        errDiv.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Korisnik s ovim emailom već postoji!";
-                        errDiv.style.display = 'block';
+                    // SIGURNOSNI KOD: Padamo na lokalnu pohranu preglednika (Browser Local Storage)
+                    let lokalniKorisnici = JSON.parse(localStorage.getItem('mrez_lokalni_korisnici') || '[]');
+                    
+                    if (isLoginMode) {
+                        const korisnik = lokalniKorisnici.find(k => k.email.toLowerCase() === email.toLowerCase() && k.pass === pass);
+                        if (korisnik) {
+                            window.trenutniKorisnik = korisnik;
+                            window.renderAuthUI();
+                        } else {
+                            throw new Error("Pogrešan email ili lozinka! (Lokalna baza)");
+                        }
                     } else {
-                        const ime = document.getElementById('auth-ime').value.trim();
-                        const noviKorisnik = { ime, email, pass, datum: new Date().toISOString() };
-                        await addDoc(korisniciRef, noviKorisnik); // Zapisivanje novog korisnika
-                        window.trenutniKorisnik = noviKorisnik;
-                        window.renderAuthUI();
+                        const postoji = lokalniKorisnici.find(k => k.email.toLowerCase() === email.toLowerCase());
+                        if (postoji) {
+                            throw new Error("Korisnik s ovim emailom već postoji! (Lokalna baza)");
+                        } else {
+                            const ime = document.getElementById('auth-ime').value.trim();
+                            const noviKorisnik = { ime, email, pass, datum: new Date().toISOString(), izvor: 'lokalno' };
+                            lokalniKorisnici.push(noviKorisnik);
+                            localStorage.setItem('mrez_lokalni_korisnici', JSON.stringify(lokalniKorisnici));
+                            window.trenutniKorisnik = noviKorisnik;
+                            window.renderAuthUI();
+                        }
                     }
                 }
             } catch (error) {
                 console.error(error);
-                errDiv.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Greška u sustavu. Pokušajte ponovno.";
+                errDiv.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i> ${error.message || "Greška u sustavu. Pokušajte ponovno."}`;
                 errDiv.style.display = 'block';
             } finally {
                 if(!window.trenutniKorisnik) { 
@@ -1185,16 +1275,19 @@
         }
 
         async function fetchKorisnike() {
-            if(!platformUserId) return;
             const listaDiv = document.getElementById('admin-korisnici-lista');
             try {
-                const korisniciRef = collection(db, 'artifacts', appId, 'public', 'data', 'korisnici');
-                const snapshot = await getDocs(korisniciRef);
+                let sviKorisnici = [];
                 
-                const sviKorisnici = [];
-                snapshot.forEach(doc => sviKorisnici.push(doc.data()));
+                if (firebaseDostupan && platformUserId) {
+                    const korisniciRef = collection(db, 'artifacts', appId, 'public', 'data', 'korisnici');
+                    const snapshot = await getDocs(korisniciRef);
+                    snapshot.forEach(doc => sviKorisnici.push(doc.data()));
+                } else {
+                    // Vučemo ih iz browsera ako smo u fallback modu
+                    sviKorisnici = JSON.parse(localStorage.getItem('mrez_lokalni_korisnici') || '[]');
+                }
                 
-                // Poredak od najnovijeg prema najstarijem
                 sviKorisnici.sort((a, b) => new Date(b.datum) - new Date(a.datum));
 
                 let html = '<ul style="list-style:none; padding:0; margin:0;">';
@@ -1213,7 +1306,7 @@
                 listaDiv.innerHTML = html;
             } catch (err) {
                 console.error(err);
-                listaDiv.innerHTML = "<span style='color:var(--crvena);'>Greška pri učitavanju korisnika iz baze.</span>";
+                listaDiv.innerHTML = "<span style='color:var(--crvena);'>Greška pri učitavanju korisnika.</span>";
             }
         }
         // =======================================================
@@ -1354,22 +1447,80 @@
             }
         });
 
-        // Odabir jezika funkcionalnost (Vizualna obrada)
-        const jezikSpanovi = document.querySelectorAll('.jezik-switch span, .jezik-switch-mobilni span');
+        // Novi plutajući odabir jezika (Sklopivi na desnoj strani)
+        const glavniJezikGumb = document.getElementById('trenutni-jezik-gumb');
+        const jezikOpcijeKontejner = document.getElementById('jezik-opcije');
+        const jezikSpanovi = document.querySelectorAll('.jezik-opcije span');
+
+        // Otvori/zatvori izbornik jezika
+        glavniJezikGumb.addEventListener('click', (e) => {
+            e.stopPropagation(); // Spriječi zatvaranje pri samom kliku na gumb
+            jezikOpcijeKontejner.classList.toggle('prikazi');
+            glavniJezikGumb.classList.toggle('otvoreno');
+        });
+
+        // Zatvori ako se klikne bilo gdje drugdje na ekranu
+        document.addEventListener('click', (e) => {
+            if (!jezikOpcijeKontejner.contains(e.target) && e.target !== glavniJezikGumb) {
+                jezikOpcijeKontejner.classList.remove('prikazi');
+                glavniJezikGumb.classList.remove('otvoreno');
+            }
+        });
+
+        // Odabir jezika
         jezikSpanovi.forEach(span => {
-            span.addEventListener('click', function() {
-                const odabraniJezik = this.innerText;
+            span.addEventListener('click', function(e) {
+                e.stopPropagation(); // Spriječi propagaciju da se odmah ne zatvori pa opet otvori
+                const odabraniJezik = this.getAttribute('data-lang');
+                
+                // Promijeni tekst na glavnom gumbu
+                glavniJezikGumb.innerText = odabraniJezik;
+
+                // Ažuriraj aktivno stanje u listi
                 jezikSpanovi.forEach(s => {
-                    if(s.innerText === odabraniJezik) {
+                    if(s.getAttribute('data-lang') === odabraniJezik) {
                         s.classList.add('aktivan');
                     } else {
                         s.classList.remove('aktivan');
                     }
                 });
-                // Ovdje se u budućnosti može dodati stvarna promjena jezika (i18n)
+
+                // Zatvori izbornik nakon odabira
+                jezikOpcijeKontejner.classList.remove('prikazi');
+                glavniJezikGumb.classList.remove('otvoreno');
             });
+        });
+
+        // ============================================
+        // LOGIKA ZA PWA INSTALACIJSKI GUMB
+        // ============================================
+        let deferredPrompt;
+        const pwaInstallBtn = document.getElementById('pwa-install-btn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Sprječava pretraživač da samostalno prikaže prozor za instalaciju
+            e.preventDefault();
+            // Sprema event kako bismo ga mogli potegnuti na klik gumba
+            deferredPrompt = e;
+            // Prikazuje naš žuti gumb
+            pwaInstallBtn.style.display = 'flex';
+        });
+
+        pwaInstallBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (deferredPrompt) {
+                // Pokreće prompt za instalaciju
+                deferredPrompt.prompt();
+                // Čeka korisnikov odgovor
+                const { outcome } = await deferredPrompt.userChoice;
+                // Ako je instalirao, mičemo gumb
+                if (outcome === 'accepted') {
+                    pwaInstallBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
+            }
         });
 
     </script>
 </body>
-    </html>
+</html>
